@@ -19,7 +19,7 @@ const AnyReactComponent = ({ area, text }) => (
                 <div className="d-flex justify- content Center flex-wrap">
                   <Badge 
                     placement="start" 
-                    color="green"
+                    color="yellow"
                     count={product.quantity}
                     className="ms-2"
                   >
