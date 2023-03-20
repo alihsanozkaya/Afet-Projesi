@@ -17,9 +17,8 @@ const AnyReactComponent = ({ area, text }) => (
             <div style={{flexDirection: "column"}}>
               {area.requrired_products.map((product) => (
                 <div className="d-flex justify- content Center flex-wrap">
-                  <Badge 
-                    placement="start" 
-                    color="yellow"
+                  <Badge
+                    color="green"
                     count={product.quantity}
                     className="ms-2"
                   >
