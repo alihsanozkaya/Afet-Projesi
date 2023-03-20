@@ -20,14 +20,6 @@ export const MapContextProvider = ({children}) =>{
     if(loading) {
         return console.log("Veriler yükleniyor...")
     }
-        // const markers = [
-            
-            
-        //     // {id: 1, lat: data[0].coordinates.latitude, lng: data[0].coordinates.longitude, title: 'Gaziantep' },
-        //     // {id: 2, lat: data[1].coordinates.latitude, lng: data[1].coordinates.longitude, title: 'Istanbul' },
-        //     // {id: 3, lat: data[2].coordinates.latitude, lng: data[2].coordinates.longitude, title: 'Ankara' }
-        // ];
-
     return(
         <MapContext.Provider value={markers}>
             {children}
