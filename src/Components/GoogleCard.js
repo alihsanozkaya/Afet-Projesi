@@ -16,16 +16,17 @@ const AnyReactComponent = ({ area, text }) => (
           ) : (
             <div style={{flexDirection: "column"}}>
               {area.requrired_products.map((product) => (
-                <div className="d-flex justify- content Center flex-wrap">
-                  <Badge
+                <div className="d-flex justify-content Center flex-wrap">
+                  <Badge 
                     color="green"
                     count={product.quantity}
-                    className="ms-2"
+                    className="mx-0 my-0"
                   >
-                    <Tag color="blue" className="mx-3 my-1">
+                     </Badge>
+                    <Tag color="blue" className="mx-0 my-2">
                       {product.Product.title}
                     </Tag>
-                  </Badge>
+                 
                 </div>
               ))}
             </div>
