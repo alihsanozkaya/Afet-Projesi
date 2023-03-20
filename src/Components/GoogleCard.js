@@ -1,22 +1,22 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import GoogleMapReact from "google-map-react";
-import { Badge, Button, Popover, Tag } from "antd";
-import { MapContext } from "../Context/MapContext";
+import {Badge, Button, Popover, Tag} from "antd";
+import {MapContext} from "../Context/MapContext";
 
-const AnyReactComponent = ({ area, text }) => (
+const AnyReactComponent = ({area, lat, lng}) => (
   <Popover
     content={
-      <div style={{ borderRadius: "10px" }}>
-        <p>Enlem: {area.coordinates.latitude}</p>
-        <p>Boylam: {area.coordinates.longitude}</p>
-        <p>
+      <div style={{borderRadius: "10px"}}>
+        <p>Enlem: {lat}</p>
+        <p>Boylam: {lng}</p>
+        <p style={{justifyContent: "space-between"}}>
           Gerekli ürünler:{" "}
           {area.requrired_products.length === 0 ? 
             "İhtiyaç yok"
            : (
-            <div style={{flexDirection: "column"}}>
+            <div className="justify-content-space-between">
               {area.requrired_products.map((product, i) => (
-                <div key={i} className="d-flex justify-content Center flex-wrap">
+                <div key={i} className="d-flex justify-content-start flex-wrap">
                   <Badge 
                     color="green"
                     count={product.quantity}
@@ -55,11 +55,10 @@ const AnyReactComponent = ({ area, text }) => (
         </p>
       </div>
     }
-    title={text}
   >
     <Button
       type="default"
-      style={{ backgroundColor: "red" }}
+      style={{backgroundColor: "red"}}
       icon={<i className="fa fa-warning"></i>}
     ></Button>
   </Popover>
@@ -73,12 +72,10 @@ export default function SimpleMap() {
     zoom: 6.37,
   };
   const markers = useContext(MapContext);
-
   return (
     <div className="container">
-      <div style={{ height: "500px", width: "auto" }}>
+      <div style={{height: "500px", width: "auto"}}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "" }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
         >
@@ -88,11 +85,6 @@ export default function SimpleMap() {
               key={marker._id}
               lat={marker.coordinates.latitude}
               lng={marker.coordinates.longitude}
-              text={
-                <>
-                  <h5>{marker.name}</h5>
-                </>
-              }
             />
           ))}
         </GoogleMapReact>
