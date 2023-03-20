@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+.header{
+  background-color: #022f57!important;
+  margin-top: 0px;
+}
+.nav-link{
+  margin-left: 20px;
+  color: #e7f6ff!important;
+}
+.nav-link:hover{
+  color: #022f57!important;
+  background-color: #e7f6ff!important;
+  border-radius: 10px;
+}
+.nav-link:active{
+  color: #2C74B3!important;
+  background-color: #e7f6ff!important;
+  border-radius: 10px;
+}
+.ornek{
+  margin: 50px;
+}
+.footer{
+  background-color: #022f57!important;
+  margin-bottom: 0px!important;
+}

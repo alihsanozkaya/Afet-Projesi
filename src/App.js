@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import MainPage from "./Pages/MainPage";
+import AboutPage from "./Pages/AboutPage";
+import ErrorPage from "./Pages/ErrorPage";
+import NeedPage from "./Pages/NeedPage";
+import ResetPasswordPage from "./Pages/ResetPasswordPage";
+import ChangePasswordPage from "./Pages/ChangePasswordPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ContextProvider } from "./Context/Context";
+import { MapContextProvider } from "./Context/MapContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextProvider>
+      <MapContextProvider>
+        <Router>
+          <Routes>
+            <Route index path="/" element={<MainPage />} />
+            <Route path="/hakkimizda" element={<AboutPage />} />
+            <Route path="/ihtiyaclar" element={<NeedPage />} />
+            <Route path="/sifresifirlama" element={<ResetPasswordPage />} />
+            <Route path="sifredegistirme" element={<ChangePasswordPage />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </Router>
+      </MapContextProvider>
+    </ContextProvider>
   );
 }
 
