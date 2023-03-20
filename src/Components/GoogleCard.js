@@ -23,10 +23,9 @@ const AnyReactComponent = ({ area, text }) => (
                     className="mx-0 my-0"
                   >
                      </Badge>
-                    <Tag color="blue" className="mx-0 my-2">
+                     <Tag color="blue" className="mx-0 my-2">
                       {product.Product.title}
                     </Tag>
-                 
                 </div>
               ))}
             </div>
