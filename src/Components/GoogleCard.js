@@ -7,6 +7,7 @@ const AnyReactComponent = ({area, lat, lng}) => (
   <Popover
     content={
       <div style={{borderRadius: "10px"}}>
+        <h5>{area.name}</h5>
         <p>Enlem: {lat}</p>
         <p>Boylam: {lng}</p>
         <p style={{justifyContent: "space-between"}}>
@@ -17,7 +18,7 @@ const AnyReactComponent = ({area, lat, lng}) => (
             <div className="justify-content-space-between">
               {area.requrired_products.map((product, i) => (
                 <div key={i} className="d-flex justify-content-start flex-wrap">
-                  <Badge 
+                  <Badge
                     color="green"
                     count={product.quantity}
                     className="mx-0 my-0 p-0"
