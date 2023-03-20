@@ -3,11 +3,11 @@ import GoogleMapReact from "google-map-react";
 import {Badge, Button, Popover, Tag} from "antd";
 import {MapContext} from "../Context/MapContext";
 
-const AnyReactComponent = ({area, lat, lng}) => (
+const AnyReactComponent = ({area, lat, lng, name}) => (
   <Popover
     content={
       <div style={{borderRadius: "10px"}}>
-        <h5>{area.name}</h5>
+        <h5>{name}</h5>
         <p>Enlem: {lat}</p>
         <p>Boylam: {lng}</p>
         <p style={{justifyContent: "space-between"}}>
@@ -83,7 +83,7 @@ export default function SimpleMap() {
           {markers.map((marker) => (
             <AnyReactComponent
               area={marker}
-              key={marker._id}
+              name={marker.name}
               lat={marker.coordinates.latitude}
               lng={marker.coordinates.longitude}
             />
