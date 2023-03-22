@@ -30,7 +30,6 @@ const Header = () => {
       <div className="col-md-3 text-end">
         <button type="button" className="btn btn-secondary mx-1" onClick={openLoginModal} style={{borderRadius: "10px"}}>Giriş yap</button>
         <button type="button" className="btn btn-info mx-1" onClick={openSignUpModal} style={{borderRadius: "10px"}}>Üye ol</button>
-        <button type='button' className='btn btn-light mx-1' style={{borderRadius: "10px"}}><i className="fa-solid fa-globe"></i></button>
       </div>
     </header>
     <LoginModal LoginModalisOpen = {LoginModalisOpen} closeLoginModal = {closeLoginModal}/>
