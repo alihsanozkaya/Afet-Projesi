@@ -86,10 +86,9 @@ export default function SimpleMap() {
       <form className="container">
       <button type="button" className="btn ml-1 text-white" style={{backgroundColor: "#222", height: "38px",borderRadius: "10px", display: "flex", justifyContent: "end", alignItems: "end", float: "right"}}>Filtreleme<i className="fa-solid fa-filter text-white"></i></button>
       <button type="button" className="btn btn-danger mx-1" style={{height: "38px",borderRadius: "10px", display: "flex", justifyContent: "end", alignItems: "end", float: "right"}}><i class="fa fa-search"></i></button>
-      <input className="form-control mr-1" style={{width: "300px", display: "flex", float: "right"}} placeholder="Adres giriniz"/>
+      <input className="form-control mr-1" style={{width: "200px", display: "flex", float: "right"}} placeholder="Adres giriniz"/>
     </form>
     </div>
-    
     <div className="container" style={{marginTop: "100px"}}>
       <div style={{ height: "500px", width: "auto" }}>
         <GoogleMapReact
