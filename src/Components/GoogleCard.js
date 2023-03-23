@@ -70,7 +70,7 @@ const AnyReactComponent = ({ area, lat, lng, name }) => (
     <Button
       type="default"
       style={{ backgroundColor: "red" }}
-      icon={<i className="fa fa-warning"></i>}
+      icon={<i class="fa-solid fa-triangle-exclamation fa-beat"></i>}
     ></Button>
   </Popover>
 );

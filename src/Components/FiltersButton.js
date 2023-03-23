@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 
 const FiltersButton = ({handleCheckboxChange}) => {
   return (
-   <Fragment>
+   <>
       <Popover
             placement="bottom"
             content={
@@ -11,7 +11,7 @@ const FiltersButton = ({handleCheckboxChange}) => {
                 <div className="px-2 mb-2 border-bottom">
                   {" "}
                   <input
-                    class="form-check-input me-2"
+                    className="form-check-input me-2"
                     type="checkbox"
                     value="Cok Acil"
                     id="flexCheckDefault"
@@ -28,7 +28,7 @@ const FiltersButton = ({handleCheckboxChange}) => {
                 <div className="px-2  mb-2 border-bottom">
                   {" "}
                   <input
-                    class="form-check-input me-2"
+                    className="form-check-input me-2"
                     type="checkbox"
                     value="Acil"
                     id="flexCheckDefault"
@@ -46,7 +46,7 @@ const FiltersButton = ({handleCheckboxChange}) => {
                 <div className="px-2 mb-2 border-bottom">
                   {" "}
                   <input
-                    class="form-check-input me-2"
+                    className="form-check-input me-2"
                     type="checkbox"
                     value="Normal"
                     id="flexCheckDefault"
@@ -63,7 +63,7 @@ const FiltersButton = ({handleCheckboxChange}) => {
                 <div className="px-2 mb-2 border-bottom">
                   {" "}
                   <input
-                    class="form-check-input me-2"
+                    className="form-check-input me-2"
                     type="checkbox"
                     value="Acil Degil"
                     id="flexCheckDefault"
@@ -87,10 +87,10 @@ const FiltersButton = ({handleCheckboxChange}) => {
               style={{ backgroundColor: "#222" }}
               onClick={(e) => e.preventDefault()}
             >
-              Filtrele <i class="fa-solid fa-filter text-white"></i>
+              Filtrele <i className="fa-solid fa-filter text-white"></i>
             </button>
           </Popover>
-   </Fragment>
+   </>
   )
 }
 export default FiltersButton

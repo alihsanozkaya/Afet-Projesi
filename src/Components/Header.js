@@ -24,7 +24,7 @@ const Header = () => {
         <li><a href="/" className="nav-link px-3">Anasayfa</a></li>
         <li><a href="/hakkimizda" className="nav-link px-3">Hakkımızda</a></li>
         <li><a href="/ihtiyaclar" className="nav-link  px-3">İhtiyaçlar</a></li>
-        <li><a href="#" className="nav-link px-3">FAQs</a></li>
+        <li><a href="/yardimtalebi" className="nav-link px-3">Yardım Talebi</a></li>
         <li><a href="#" className="nav-link px-3">About</a></li>
       </ul>
       <div className="col-md-3 text-end">

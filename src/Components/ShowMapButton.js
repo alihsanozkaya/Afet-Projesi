@@ -18,9 +18,9 @@ const ShowMapButton = ({ showMap, handleToggleShowMap }) => {
               {showMap ? "Haritayı kapat" : "Haritayı göster"}
             </a>
             {showMap ? (
-              <i class="fa-solid fa-x mx-2 fs-5 text-white"></i>
+              <i className="fa-solid fa-x mx-2 fs-5 text-white"></i>
             ) : (
-              <i class="fa-solid fa-map mx-2 fs-5 text-white"></i>
+              <i className="fa-solid fa-map mx-2 fs-5 text-white"></i>
             )}
           </div>
         }

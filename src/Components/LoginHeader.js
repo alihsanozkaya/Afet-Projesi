@@ -12,10 +12,10 @@ const LoginHeader = () => {
     <>
       <header className="header d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-5 border-bottom">
         <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" className="nav-link px-3 link-secondary">Overview</a></li>
-          <li><a href="#" className="nav-link px-3 link-dark">Inventory</a></li>
-          <li><a href="#" className="nav-link px-3 link-dark">Customers</a></li>
-          <li><a href="#" className="nav-link px-3 link-dark">Products</a></li>
+        <li><a href="/" className="nav-link px-3">Anasayfa</a></li>
+        <li><a href="/hakkimizda" className="nav-link px-3">Hakkımızda</a></li>
+        <li><a href="/ihtiyaclar" className="nav-link  px-3">İhtiyaçlar</a></li>
+        <li><a href="/yardimtalebi" className="nav-link px-3">Yardım Talebi</a></li>
         </ul>
         <div className="col-md-3 text-end mx-5">
         <a class="d-block link-dark text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{float: "right"}}>
