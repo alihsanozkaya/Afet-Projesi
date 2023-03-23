@@ -15,7 +15,7 @@ const ShowMapButton = ({ showMap, handleToggleShowMap }) => {
               className="text-white "
               style={{ fontSize: "16px", textDecoration: "none" }}
             >
-              {showMap ? "Close Map" : "Show Map"}
+              {showMap ? "Haritayı kapat" : "Haritayı göster"}
             </a>
             {showMap ? (
               <i class="fa-solid fa-x mx-2 fs-5 text-white"></i>
