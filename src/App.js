@@ -7,11 +7,13 @@ import ChangePasswordPage from "./Pages/ChangePasswordPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ContextProvider } from "./Context/Context";
 import { MapContextProvider } from "./Context/MapContext";
+import {FilterContextProvider} from "./Context/FilterContext";
 
 function App() {
   return (
     <ContextProvider>
       <MapContextProvider>
+        <FilterContextProvider>
         <Router>
           <Routes>
             <Route index path="/" element={<MainPage />} />
@@ -22,6 +24,7 @@ function App() {
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Router>
+        </FilterContextProvider>   
       </MapContextProvider>
     </ContextProvider>
   );
