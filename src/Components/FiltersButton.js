@@ -13,7 +13,7 @@ const FiltersButton = ({handleCheckboxChange}) => {
                   <input
                     class="form-check-input me-2"
                     type="checkbox"
-                    value="cok-acil"
+                    value="Cok Acil"
                     id="flexCheckDefault"
                     onClick={(e)  => handleCheckboxChange(e.target.value) }
                   />{" "}
@@ -30,7 +30,7 @@ const FiltersButton = ({handleCheckboxChange}) => {
                   <input
                     class="form-check-input me-2"
                     type="checkbox"
-                    value="acil"
+                    value="Acil"
                     id="flexCheckDefault"
                     onClick={(e)  => handleCheckboxChange(e.target.value) }
                   />{" "}
@@ -48,7 +48,7 @@ const FiltersButton = ({handleCheckboxChange}) => {
                   <input
                     class="form-check-input me-2"
                     type="checkbox"
-                    value="normal"
+                    value="Normal"
                     id="flexCheckDefault"
                     onClick={(e)  => handleCheckboxChange(e.target.value) }
                   />{" "}
@@ -65,7 +65,7 @@ const FiltersButton = ({handleCheckboxChange}) => {
                   <input
                     class="form-check-input me-2"
                     type="checkbox"
-                    value="acil-degil"
+                    value="Acil Degil"
                     id="flexCheckDefault"
                     onClick={(e)  => handleCheckboxChange(e.target.value) }
                   />{""}
