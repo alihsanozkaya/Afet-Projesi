@@ -1,24 +1,41 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Layout from "../Components/Layout";
+import { FormIDContext } from "../Context/FormIDContext";
+import axios from 'axios'
+import { PostFormContext } from "../Context/PostFormContext";
 
 const HelpFormPage = () => {
+  const {categoryID} = useParams()
+  const [loading, setLoading] = useState(true);
+  const [formCategory, setFormCategory] = useState({});
+  const {data, setData, createForm} = useContext(PostFormContext);
+  const [urgencies, setUrgencies] = useState(['Kritik','Orta','Normal'])
+  const [urgency, setUrgency] = useState("")
+  // const handleSelect  = (e) => {
+  //   setUrgency({...data, urgency: e.target.value})
+  //   console.log(urgency)
+  // }
+  console.log(formCategory)
+  useEffect(() => {
+    axios.get(`https://afetapi.onrender.com/api/formCategories/${categoryID}`)
+    .then(res => {
+      setLoading(false)
+      setFormCategory(res.data)
+      setData({category: categoryID})
+    })
+    .catch((error) => {
+      console.log(error)
+      setLoading(false)
+    })
+  }, [])
+  if(loading){
+      return console.log("Veriler yükleniyor...")
+  }
   return (
     <Layout>
-      <form id="form">
-        <input
-          type="text"
-          name="yardimTipi"
-          value="gida"
-          style={{ display: "none" }}
-          readOnly=""
-        />
-        <input
-          type="text"
-          name="yardimDurumu"
-          value="bekleniyor"
-          style={{ display: "none" }}
-          readOnly=""
-        />
+      <h2>{formCategory.name}</h2>
+      <form id="form" className="mt-2">
         <div className="form-row form-col-3 my-1">
           <div className="form-col">
             <label for="adSoyad">* İsim &amp; Soyisim:</label>
@@ -27,6 +44,8 @@ const HelpFormPage = () => {
               className="form-control required-field"
               id="adSoyad"
               name="adSoyad"
+              value={data.name}
+              onChange={(e) => setData({...data,name: e.target.value})}
               placeholder="* İsim &amp; Soyisim"
               required=""
             />
@@ -39,6 +58,8 @@ const HelpFormPage = () => {
               className="form-control"
               id="email"
               name="email"
+              value={data.email}
+              onChange={(e) => setData({...data, email: e.target.value})}
               placeholder="Email"
             />
           </div>
@@ -49,6 +70,8 @@ const HelpFormPage = () => {
               className="form-control"
               id="telefon"
               name="telefon"
+              value={data.phoneNumber}
+              onChange={(e) => setData({...data, phoneNumber: e.target.value})}
               placeholder="* Telefon"
               required=""
             />
@@ -64,15 +87,17 @@ const HelpFormPage = () => {
           </a>
         </div>
         <div className="form-row my-1">
-          <label for="kisiSayisi">Kişi Sayısı:</label>
+          <label>Kişi Sayısı:</label>
           <input
             type="number"
             min="1"
             max="1024"
-            maxlength="4"
+            maxLength="4"
             className="form-control"
             id="kisiSayisi"
             name="kisiSayisi"
+            value={data.numberOfPerson}
+            onChange={(e) => setData({...data, numberOfPerson: e.target.value})}
             placeholder="Kişi Sayısı"
           />
         </div>
@@ -83,18 +108,10 @@ const HelpFormPage = () => {
             className="form-control required-field"
             id="adres"
             name="adres"
+            value={data.address}
+            onChange={(e) => setData({...data, address: e.target.value})}
             placeholder="* Adres"
             required=""
-          />
-        </div>
-        <div className="form-row my-1">
-          <label for="adres-tarifi">Adres Tarifi:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="adres-tarifi"
-            name="adresTarifi"
-            placeholder="Adres Tarifi"
           />
         </div>
         <div className="form-row form-col-auto my-1">
@@ -103,32 +120,12 @@ const HelpFormPage = () => {
               <label> Aciliyet: </label>
             </div>
             <div className="form-row">
-              <label for="kritik">
-                <input
-                  type="radio"
-                  id="kritik"
-                  name="acilDurum"
-                  value="kritik"
-                />
-                Kritik
-              </label>
-            </div>
-            <div className="form-row my-1">
-              <label for="orta">
-                <input type="radio" id="orta" name="acilDurum" value="orta" />
-                Orta
-              </label>
-            </div>
-            <div className="form-row my-1">
-              <label for="normal">
-                <input
-                  type="radio"
-                  id="normal"
-                  name="acilDurum"
-                  value="normal"
-                />
-                Normal
-              </label>
+            <select id="inputState" className="form-control" value={data.urgency} onChange={(e) => setData({...data, urgency: e.target.value})} >
+              <option selected value={""}>Aciliyet</option>
+            {urgencies.map((urgency,i) => (
+              <option key={i} value={urgency} >{urgency}</option>
+            ))}
+            </select>
             </div>
           </div>
           <div className="form-col my-1">
@@ -154,30 +151,6 @@ const HelpFormPage = () => {
             placeholder="Google Maps Linki"
           />
         </div>
-        <div className="form-col my-1">
-          <div className="form-row">
-            <label for="arac-var">
-              <input
-                type="radio"
-                id="arac-var"
-                name="fields-aracDurumu"
-                value="var"
-              />
-              Aracım var, yardımı kendim teslim alabilirim.
-            </label>
-          </div>
-          <div className="form-row my-1">
-            <label for="arac-yok">
-              <input
-                type="radio"
-                id="arac-yok"
-                name="fields-aracDurumu"
-                value="yok"
-              />
-              Aracım yok, yardımın teslim edilmesi gerek.
-            </label>
-          </div>
-        </div>
         <p className="aydinlatma">
           6698 sayılı KVKK kapsamında “Uygulamamıza depremzede ya da depremzede
           yakını olarak kaydolan kullanıcılardan ad, soyadı, iletişim bilgisi,
@@ -194,7 +167,7 @@ const HelpFormPage = () => {
           </label>
         </div>
         <div>
-          <button className="btn btn-success" type="submit">Gönder</button>
+          <button className="btn btn-success" type="submit" onClick={(e) => {e.preventDefault(); createForm()}}>Gönder</button>
         </div>
       </form>
     </Layout>

@@ -18,7 +18,7 @@ const LoginHeader = () => {
         <li><a href="/yardimtalebi" className="nav-link px-3">Yardım Talebi</a></li>
         </ul>
         <div className="col-md-3 text-end mx-5">
-        <a class="d-block link-dark text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{float: "right"}}>
+        <a className="d-block link-dark text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{float: "right"}}>
             <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle"/>
           </a>
           <ul

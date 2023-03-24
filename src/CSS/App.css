@@ -46,12 +46,12 @@
 }
 .nav-link:hover{
   color: #022f57!important;
-  background-color: #e7f6ff!important;
+  background-color: #c0c0c0!important;
   border-radius: 10px!important;
 }
 .nav-link:active{
   color: #2C74B3!important;
-  background-color: #e7f6ff!important;
+  background-color: #c0c0c0!important;
   border-radius: 10px!important;
 }
 .ornek{
