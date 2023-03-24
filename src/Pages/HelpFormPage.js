@@ -12,10 +12,7 @@ const HelpFormPage = () => {
   const {data, setData, createForm} = useContext(PostFormContext);
   const [urgencies, setUrgencies] = useState(['Kritik','Orta','Normal'])
   const [urgency, setUrgency] = useState("")
-  // const handleSelect  = (e) => {
-  //   setUrgency({...data, urgency: e.target.value})
-  //   console.log(urgency)
-  // }
+
   console.log(formCategory)
   useEffect(() => {
     axios.get(`https://afetapi.onrender.com/api/formCategories/${categoryID}`)
