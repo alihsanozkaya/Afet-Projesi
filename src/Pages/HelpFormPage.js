@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../Components/Layout";
-import { FormIDContext } from "../Context/FormIDContext";
 import axios from "axios";
 import { PostFormContext } from "../Context/PostFormContext";
 
@@ -12,7 +11,6 @@ const HelpFormPage = () => {
   const { data, setData, createForm } = useContext(PostFormContext);
   const urgencies = ["Kritik", "Orta", "Normal"];
 
-  console.log(formCategory);
   useEffect(() => {
     axios
       .get(`https://afetapi.onrender.com/api/formCategories/${categoryID}`)
@@ -36,7 +34,7 @@ const HelpFormPage = () => {
         <form id="form" className="mt-2">
           <div className="form-row form-col-3 my-1">
             <div className="form-col mr-3">
-              <label for="adSoyad">* İsim &amp; Soyisim:</label>
+              <label>* İsim &amp; Soyisim:</label>
               <input
                 type="text"
                 className="form-control required-field"
@@ -49,7 +47,7 @@ const HelpFormPage = () => {
               />
             </div>
             <div className="form-col mr-3">
-              <label for="email">Email:</label>
+              <label>Email:</label>
               <input
                 type="email"
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
@@ -62,7 +60,7 @@ const HelpFormPage = () => {
               />
             </div>
             <div className="form-col">
-              <label for="telefon">* Telefon (5XX XXX XX XX): </label>
+              <label>* Telefon (5XX XXX XX XX): </label>
               <input
                 type="tel"
                 className="form-control"
@@ -100,7 +98,7 @@ const HelpFormPage = () => {
             />
           </div>
           <div className="form-row my-1">
-            <label for="adres">* Adres:</label>
+            <label>* Adres:</label>
             <input
               type="text"
               className="form-control required-field"
@@ -121,12 +119,12 @@ const HelpFormPage = () => {
                 <select
                   id="inputState"
                   className="form-control"
-                  value={data.urgency}
+                  defaultValue={data.urgency}
                   onChange={(e) =>
                     setData({ ...data, urgency: e.target.value })
                   }
                 >
-                  <option selected value={""}>
+                  <option defaultValue={""}>
                     Aciliyet
                   </option>
                   {urgencies.map((urgency, i) => (
@@ -140,7 +138,7 @@ const HelpFormPage = () => {
             </div>
             <div className="form-col my-2">
               <div className="form-col mr-3">
-                <label for="fizikiDurum">* Fiziki Durum Hakkında Bilgi:</label>
+                <label>* Fiziki Durum Hakkında Bilgi:</label>
                 <textarea
                   className="form-control required-field"
                   name="fizikiDurum"
@@ -154,7 +152,7 @@ const HelpFormPage = () => {
             </div>
           </div>
           <div className="form-row my-1">
-            <label for="googleMapLink">Google Maps Linki:</label>
+            <label>Google Maps Linki:</label>
             <input
               type="text"
               className="form-control"
@@ -173,7 +171,7 @@ const HelpFormPage = () => {
             ziyaret etmek ister misiniz?
           </p>
           <div className="form-row">
-            <label for="kvkk" className="checkbox">
+            <label className="checkbox">
               <input type="checkbox" id="kvkk" name="fields-kvkk" required="" />
               * Okudum ve aydınlandım
             </label>

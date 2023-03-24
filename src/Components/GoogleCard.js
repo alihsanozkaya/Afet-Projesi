@@ -91,8 +91,6 @@ export default function SimpleMap() {
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
-    console.log(latLng.lat);
-    console.log(latLng.lng);
     setAddress(value);
     setCenter(latLng);
 
@@ -117,7 +115,6 @@ export default function SimpleMap() {
   };
   const { handleCheckboxChange } = useContext(FilterContext);
   const { areas } = useContext(FilterContext);
-  console.log(areas);
   return (
     <>
       <div className="container d-flex flex-row justify-content-end">

@@ -40,7 +40,6 @@ export const PostFormContextProvider = ({ children }) => {
 
   return (
     <PostFormContext.Provider value={postFormContextValue}>
-      {console.log(data)}
       {children}
     </PostFormContext.Provider>
   );

@@ -41,7 +41,6 @@ export const FilterContextProvider = ({ children }) => {
   return (
     <FilterContext.Provider value={{checkedValues, handleCheckboxChange, areas}}>      
       {children}
-      {console.log(checkedValues)}
     </FilterContext.Provider>
   );
 };
