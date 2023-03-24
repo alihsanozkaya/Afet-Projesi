@@ -19,32 +19,32 @@ function App() {
       <MapContextProvider>
         <FilterContextProvider>
           <FormContextProvider>
-              <PostFormContextProvider>
-                <Router>
-                  <Routes>
-                    <Route index path="/" element={<MainPage />} />
-                    <Route path="/hakkimizda" element={<AboutPage />} />
-                    <Route path="/ihtiyaclar" element={<NeedPage />} />
-                    <Route
-                      path="/yardimtalebi"
-                      element={<RequestForHelpPage />}
-                    />
-                    <Route
-                      path="/yardimtalebi/:categoryID"
-                      element={<HelpFormPage />}
-                    />
-                    <Route
-                      path="/sifresifirlama"
-                      element={<ResetPasswordPage />}
-                    />
-                    <Route
-                      path="sifredegistirme"
-                      element={<ChangePasswordPage />}
-                    />
-                    <Route path="*" element={<ErrorPage />} />
-                  </Routes>
-                </Router>
-              </PostFormContextProvider>
+            <PostFormContextProvider>
+              <Router>
+                <Routes>
+                  <Route index path="/" element={<MainPage />} />
+                  <Route path="/hakkimizda" element={<AboutPage />} />
+                  <Route path="/ihtiyaclar" element={<NeedPage />} />
+                  <Route
+                    path="/yardimtalebi"
+                    element={<RequestForHelpPage />}
+                  />
+                  <Route
+                    path="/yardimtalebi/:categoryID"
+                    element={<HelpFormPage />}
+                  />
+                  <Route
+                    path="/sifresifirlama"
+                    element={<ResetPasswordPage />}
+                  />
+                  <Route
+                    path="sifredegistirme"
+                    element={<ChangePasswordPage />}
+                  />
+                  <Route path="*" element={<ErrorPage />} />
+                </Routes>
+              </Router>
+            </PostFormContextProvider>
           </FormContextProvider>
         </FilterContextProvider>
       </MapContextProvider>

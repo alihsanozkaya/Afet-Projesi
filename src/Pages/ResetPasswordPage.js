@@ -1,4 +1,4 @@
-import Layout  from "../Components/Layout";
+import Layout from "../Components/Layout";
 import React from "react";
 
 const ResetPasswordPage = () => {
@@ -33,8 +33,13 @@ const ResetPasswordPage = () => {
                             </div>
                           </div>
                           <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="button" className="btn btn-primary btn-lg">Şifreyi sıfırla</button>
-                      </div>
+                            <button
+                              type="button"
+                              className="btn btn-primary btn-lg"
+                            >
+                              Şifreyi sıfırla
+                            </button>
+                          </div>
                         </form>
                       </div>
                       <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">

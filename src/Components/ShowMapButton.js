@@ -35,4 +35,4 @@ const ShowMapButton = ({ showMap, handleToggleShowMap }) => {
   );
 };
 
-export default ShowMapButton;
+export default ShowMapButton;

@@ -35,12 +35,12 @@ export const PostFormContextProvider = ({ children }) => {
   const postFormContextValue = {
     data,
     createForm,
-    setData
+    setData,
   };
 
   return (
     <PostFormContext.Provider value={postFormContextValue}>
       {children}
     </PostFormContext.Provider>
-  );
+  );
 };

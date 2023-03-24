@@ -125,7 +125,7 @@ export default function SimpleMap() {
             handleSelect={handleSelect}
           />
         </div>
-        <div style={{maxHeight: "38px"}}>
+        <div style={{ maxHeight: "38px" }}>
           <FiltersButton handleCheckboxChange={handleCheckboxChange} />
         </div>
       </div>
