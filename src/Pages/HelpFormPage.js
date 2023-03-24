@@ -63,6 +63,7 @@ const HelpFormPage = () => {
               <label>* Telefon (5XX XXX XX XX): </label>
               <input
                 type="tel"
+                maxLength="10"
                 className="form-control"
                 id="telefon"
                 name="telefon"
@@ -110,8 +111,8 @@ const HelpFormPage = () => {
               required=""
             />
           </div>
-          <div className="form-col my-2">
-            <div className="form-col mr-3" style={{ width: "100px" }}>
+          <div className="form-col my-1">
+            <div className="form-col my-1" style={{ width: "100px" }}>
               <div className="form-row">
                 <label> Aciliyet: </label>
               </div>
@@ -131,13 +132,11 @@ const HelpFormPage = () => {
                     <option key={i} value={urgency}>
                       {urgency}
                     </option>
-                  ))}
-                         
+                  ))}                         
                 </select>
               </div>
             </div>
             <div className="form-col my-2">
-              <div className="form-col mr-3">
                 <label>* Fiziki Durum Hakkında Bilgi:</label>
                 <textarea
                   className="form-control required-field"
@@ -149,7 +148,6 @@ const HelpFormPage = () => {
                   required=""
                 ></textarea>
               </div>
-            </div>
           </div>
           <div className="form-row my-1">
             <label>Google Maps Linki:</label>
@@ -167,13 +165,13 @@ const HelpFormPage = () => {
             iletişim bilgisi, log kaydı ve depremzedenin sisteme girilen ve
             kendileri tarafından alenileştirilmiş konum verilerini topluyoruz.”
             Veri işleme hukuki sebeplerimizi, amaçlarımızı görmek ve haklarınızı
-            öğrenmek <a href="../legal/hukuki-kvkk.html">Aydınlatma Metnini</a>
+            öğrenmek <a href="../legal/hukuki-kvkk.html">Aydınlatma Metnini </a>
             ziyaret etmek ister misiniz?
           </p>
           <div className="form-row">
-            <label className="checkbox">
-              <input type="checkbox" id="kvkk" name="fields-kvkk" required="" />
-              * Okudum ve aydınlandım
+            <label className="checkbox mx-2">
+              <input className="mx-2" type="checkbox" id="kvkk" name="fields-kvkk" required="" />
+                 * Okudum ve aydınlandım
             </label>
           </div>
           <div>
