@@ -76,28 +76,7 @@ const HelpFormPage = () => {
               />
             </div>
           </div>
-          <div
-            className="form-row form-col-3 my-1"
-            id="yedekTelefonlar"
-            style={{ alignItems: "center" }}
-          ></div>
-          <div className="form-row my-1">
-            <label>Kişi Sayısı:</label>
-            <input
-              type="number"
-              min="1"
-              max="1024"
-              maxLength="4"
-              className="form-control"
-              id="kisiSayisi"
-              name="kisiSayisi"
-              value={data.numberOfPerson}
-              onChange={(e) =>
-                setData({ ...data, numberOfPerson: e.target.value })
-              }
-              placeholder="Kişi Sayısı"
-            />
-          </div>
+          <div className="form-row my-1"></div>
           <div className="form-row my-1">
             <label>* Adres:</label>
             <input
@@ -111,43 +90,55 @@ const HelpFormPage = () => {
               required=""
             />
           </div>
-          <div className="form-col my-1">
-            <div className="form-col my-1" style={{ width: "100px" }}>
-              <div className="form-row">
-                <label> Aciliyet: </label>
-              </div>
-              <div className="form-row">
-                <select
-                  id="inputState"
-                  className="form-control"
-                  defaultValue={data.urgency}
-                  onChange={(e) =>
-                    setData({ ...data, urgency: e.target.value })
-                  }
-                >
-                  <option defaultValue={""}>
-                    Aciliyet
+          <div className="form-col my-1" style={{ width: "100px" }}>
+            <div className="form-row">
+              <label> Aciliyet: </label>
+            </div>
+            <div className="form-row">
+              <select
+                id="inputState"
+                className="form-control"
+                defaultValue={data.urgency}
+                onChange={(e) => setData({ ...data, urgency: e.target.value })}
+              >
+                <option defaultValue={""}>Aciliyet</option>
+                {urgencies.map((urgency, i) => (
+                  <option key={i} value={urgency}>
+                    {urgency}
                   </option>
-                  {urgencies.map((urgency, i) => (
-                    <option key={i} value={urgency}>
-                      {urgency}
-                    </option>
-                  ))}                         
-                </select>
-              </div>
+                ))}{" "}
+                       
+              </select>
+              <label className="my-1">Kişi Sayısı:</label>
+              <input
+                type="number"
+                min="1"
+                max="1024"
+                maxLength="4"
+                className="form-control"
+                id="kisiSayisi"
+                name="kisiSayisi"
+                value={data.numberOfPerson}
+                onChange={(e) =>
+                  setData({ ...data, numberOfPerson: e.target.value })
+                }
+                placeholder="Kişi Sayısı"
+              />
             </div>
             <div className="form-col my-2">
-                <label>* Fiziki Durum Hakkında Bilgi:</label>
-                <textarea
-                  className="form-control required-field"
-                  name="fizikiDurum"
-                  id="fizikiDurum"
-                  cols="30"
-                  rows="4"
-                  placeholder="* Fiziki Durum Hakkında Bilgi"
-                  required=""
-                ></textarea>
-              </div>
+              <label style={{ width: "208px" }}>
+                * Fiziki Durum Hakkında Bilgi:
+              </label>
+              <textarea
+                style={{ width: "auto" }}
+                className="form-control"
+                name="fizikiDurum"
+                id="fizikiDurum"
+                cols="60"
+                rows="4"
+                placeholder="* Fiziki Durum Hakkında Bilgi"
+              ></textarea>
+            </div>
           </div>
           <div className="form-row my-1">
             <label>Google Maps Linki:</label>
@@ -170,8 +161,14 @@ const HelpFormPage = () => {
           </p>
           <div className="form-row">
             <label className="checkbox mx-2">
-              <input className="mx-2" type="checkbox" id="kvkk" name="fields-kvkk" required="" />
-                 * Okudum ve aydınlandım
+              <input
+                className="mx-2"
+                type="checkbox"
+                id="kvkk"
+                name="fields-kvkk"
+                required=""
+              />
+              * Okudum ve aydınlandım
             </label>
           </div>
           <div>
