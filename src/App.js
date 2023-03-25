@@ -12,6 +12,7 @@ import { MapContextProvider } from "./Context/MapContext";
 import { FilterContextProvider } from "./Context/FilterContext";
 import { FormContextProvider } from "./Context/FormContext";
 import { PostFormContextProvider } from "./Context/PostFormContext";
+import { CategoryIDContextProvider } from "./Context/CategoryIDContext";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <FilterContextProvider>
           <FormContextProvider>
             <PostFormContextProvider>
+              {/* <CategoryIDContextProvider> */}
               <Router>
                 <Routes>
                   <Route index path="/" element={<MainPage />} />
@@ -44,6 +46,7 @@ function App() {
                   <Route path="*" element={<ErrorPage />} />
                 </Routes>
               </Router>
+              {/* </CategoryIDContextProvider> */}
             </PostFormContextProvider>
           </FormContextProvider>
         </FilterContextProvider>

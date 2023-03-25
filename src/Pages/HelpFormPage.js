@@ -30,10 +30,10 @@ const HelpFormPage = () => {
   return (
     <Layout>
       <div className="container">
-        <h2>{formCategory.name}</h2>
+        <h2 className="my-4" style={{color: "blue"}}>{formCategory.name}</h2>
         <form id="form" className="mt-2">
-          <div className="form-row form-col-3 my-1">
-            <div className="form-col mr-3">
+          <div className="form-row my-2">
+            <div className="form-col mr-4">
               <label>* İsim &amp; Soyisim:</label>
               <input
                 type="text"
@@ -46,7 +46,7 @@ const HelpFormPage = () => {
                 required=""
               />
             </div>
-            <div className="form-col mr-3">
+            <div className="form-col mr-4">
               <label>Email:</label>
               <input
                 type="email"
@@ -76,8 +76,7 @@ const HelpFormPage = () => {
               />
             </div>
           </div>
-          <div className="form-row my-1"></div>
-          <div className="form-row my-1">
+          <div className="form-row my-2">
             <label>* Adres:</label>
             <input
               type="text"
@@ -90,16 +89,15 @@ const HelpFormPage = () => {
               required=""
             />
           </div>
-          <div className="form-col my-1" style={{ width: "100px" }}>
-            <div className="form-row">
+          <div className="form-row my-2">
+            <div className="form-col mr-4">
               <label> Aciliyet: </label>
-            </div>
-            <div className="form-row">
               <select
                 id="inputState"
                 className="form-control"
                 defaultValue={data.urgency}
                 onChange={(e) => setData({ ...data, urgency: e.target.value })}
+                style={{ width: "120px" }}
               >
                 <option defaultValue={""}>Aciliyet</option>
                 {urgencies.map((urgency, i) => (
@@ -109,12 +107,14 @@ const HelpFormPage = () => {
                 ))}{" "}
                        
               </select>
-              <label className="my-1">Kişi Sayısı:</label>
+            </div>
+            <div className="form-col mr-4">
+              <label>Kişi Sayısı:</label>
               <input
                 type="number"
                 min="1"
                 max="1024"
-                maxLength="4"
+                maxLength="5"
                 className="form-control"
                 id="kisiSayisi"
                 name="kisiSayisi"
@@ -122,35 +122,40 @@ const HelpFormPage = () => {
                 onChange={(e) =>
                   setData({ ...data, numberOfPerson: e.target.value })
                 }
+                style={{ width: "120px" }}
                 placeholder="Kişi Sayısı"
               />
             </div>
-            <div className="form-col my-2">
-              <label style={{ width: "208px" }}>
-                * Fiziki Durum Hakkında Bilgi:
-              </label>
-              <textarea
-                style={{ width: "auto" }}
-                className="form-control"
-                name="fizikiDurum"
-                id="fizikiDurum"
-                cols="60"
-                rows="4"
-                placeholder="* Fiziki Durum Hakkında Bilgi"
-              ></textarea>
-            </div>
+            <div className="form-col">
+            <label className="form-row ">Konum Paylaşımı</label>
+            <button
+              type="button"
+              className="btn btn-warning"
+              style={{ borderRadius: "10px" }}
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              Konum Paylaşımı
+            </button>
           </div>
-          <div className="form-row my-1">
-            <label>Google Maps Linki:</label>
-            <input
-              type="text"
+          </div>
+          <div className="form-row my-2">
+            <label style={{ width: "208px" }}>
+              * Fiziki Durum Hakkında Bilgi:
+            </label>
+            <textarea
               className="form-control"
-              id="googleMapLink"
-              name="googleMapLink"
-              placeholder="Google Maps Linki"
-            />
+              name="fizikiDurum"
+              id="fizikiDurum"
+              cols="60"
+              rows="4"
+              placeholder="* Fiziki Durum Hakkında Bilgi"
+            ></textarea>
           </div>
-          <p className="aydinlatma">
+          
+
+          <p className="aydinlatma my-2">
             6698 sayılı KVKK kapsamında “Uygulamamıza depremzede ya da
             depremzede yakını olarak kaydolan kullanıcılardan ad, soyadı,
             iletişim bilgisi, log kaydı ve depremzedenin sisteme girilen ve
