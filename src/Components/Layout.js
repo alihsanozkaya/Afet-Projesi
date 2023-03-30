@@ -17,9 +17,7 @@ const Layout = ({ children }) => {
     <>
       {state === true ? <LoginHeader /> : <Header />}
       {showMap ? (
-        <>
           <GoogleCard />
-        </>
       ) : (
         <div className="container">{children}</div>
       )}

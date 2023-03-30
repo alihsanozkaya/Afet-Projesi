@@ -5,6 +5,7 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { FilterContext } from "../Context/FilterContext";
 import FiltersButton from "./FiltersButton";
 import SearchInput from "./SearchInput";
+import RequiredItems from "./RequiredItems";
 
 const AnyReactComponent = ({ area, lat, lng, name }) => (
   <Popover
@@ -23,19 +24,7 @@ const AnyReactComponent = ({ area, lat, lng, name }) => (
           ) : (
             <div className="d-flex flex-wrap justify-content-start">
               {area.requrired_products.map((product, i) => (
-                <div
-                  key={i}
-                  className="d-flex justify-content Center flex-wrap"
-                >
-                  <Badge
-                    color="green"
-                    count={product.quantity}
-                    className="ml-2 my-0 p-0"
-                  ></Badge>
-                  <Tag color="blue" className="mx-0 my-2 p-1">
-                    {product.Product.title}
-                  </Tag>
-                </div>
+                <RequiredItems product={product} isPerson = {false} key={i}/>
               ))}
             </div>
           )}
@@ -47,19 +36,7 @@ const AnyReactComponent = ({ area, lat, lng, name }) => (
           ) : (
             <div className="d-flex flex-wrap justify-content-start">
               {area.requrired_people.map((person, i) => (
-                <div
-                  key={i}
-                  className="d-flex justify-content Center flex-wrap"
-                >
-                  <Badge
-                    color="green"
-                    count={person.quantity}
-                    className="ml-2 my-0 p-0"
-                  ></Badge>
-                  <Tag color="blue" className="mx-0 my-2 p-1">
-                    {person.Person.name}
-                  </Tag>
-                </div>
+                <RequiredItems person={person} isPerson = {true} key={`person-${i}`}/>
               ))}
             </div>
           )}

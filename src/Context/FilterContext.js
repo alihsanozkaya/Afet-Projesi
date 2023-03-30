@@ -21,20 +21,23 @@ export const FilterContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        checkedValues !== []
-          ? `https://afetapi.onrender.com/api/get-filter-areas?priorityOrders=${checkedValues}`
-          : `https://afetapi.onrender.com/api/get-filter-areas?priorityOrders=`
-      )
-      .then((res) => {
-        setLoading(false);
-        setAreas(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    async function fetchData() {
+      await axios
+        .get(
+          checkedValues !== []
+            ? `https://afetapi.onrender.com/api/get-filter-areas?priorityOrders=${checkedValues}`
+            : `https://afetapi.onrender.com/api/get-filter-areas?priorityOrders=`
+        )
+        .then((res) => {
+          setLoading(false);
+          setAreas(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+    }
+    fetchData();
   }, [checkedValues]);
   if (loading) {
     return console.log("Veriler yükleniyor...");

@@ -1,9 +1,8 @@
 import { Popover } from "antd";
-import React, { Fragment } from "react";
+import React from "react";
 
 const FiltersButton = ({ handleCheckboxChange }) => {
   return (
-    <>
       <Popover
         placement="bottom"
         content={
@@ -91,7 +90,6 @@ const FiltersButton = ({ handleCheckboxChange }) => {
           Filtrele <i className="fa-solid fa-filter text-white"></i>
         </button>
       </Popover>
-    </>
   );
 };
 export default FiltersButton;

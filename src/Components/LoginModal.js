@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { Context } from "../Context/Context";
 
 Modal.setAppElement("#root");
-const SignUpModal = ({ LoginModalisOpen, closeLoginModal }) => {
+const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
   const { setState } = useContext(Context);
 
   const Login = () => {
@@ -93,4 +93,4 @@ const SignUpModal = ({ LoginModalisOpen, closeLoginModal }) => {
   );
 };
 
-export default SignUpModal;
+export default LoginModal;

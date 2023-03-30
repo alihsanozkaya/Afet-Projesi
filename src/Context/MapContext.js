@@ -7,7 +7,8 @@ export const MapContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [markers, setMarkers] = useState([]);
   useEffect(() => {
-    axios
+    async function fetchData(){
+      await axios
       .get("https://afetapi.onrender.com/api/areas")
       .then((res) => {
         setLoading(false);
@@ -16,7 +17,8 @@ export const MapContextProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
-      });
+      });}
+      fetchData();
   }, []);
   if (loading) {
     return console.log("Veriler yükleniyor...");

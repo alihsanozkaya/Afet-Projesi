@@ -7,7 +7,8 @@ export const FormContextProvider = ({ children }) => {
   const [formCategories, setformCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios
+    async function fetchData(){
+     await axios
       .get("https://afetapi.onrender.com/api/formCategories")
       .then((res) => {
         setLoading(false);
@@ -16,7 +17,8 @@ export const FormContextProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
-      });
+      });}
+      fetchData();
   }, []);
   if (loading) {
     return console.log("Veriler yükleniyor...");
