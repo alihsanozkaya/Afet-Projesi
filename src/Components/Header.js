@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../CSS/App.css";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
+import Notification from "./Notification";
 
 const Header = () => {
   const [LoginModalisOpen, setLoginModalisOpen] = useState(false);
@@ -65,6 +66,7 @@ const Header = () => {
           >
             Üye ol
           </button>
+          <Notification/>
         </div>
       </header>
       <LoginModal
