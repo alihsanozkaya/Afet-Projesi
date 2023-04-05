@@ -12,41 +12,45 @@ import { MapContextProvider } from "./Context/MapContext";
 import { FilterContextProvider } from "./Context/FilterContext";
 import { FormContextProvider } from "./Context/FormContext";
 import { PostFormContextProvider } from "./Context/PostFormContext";
-import { CategoryIDContextProvider } from "./Context/CategoryIDContext";
+import { UserContextProvider } from "./Context/UserContext";
+import { UserTaskContextProvider } from "./Context/UserTaskContext";
 
 function App() {
+
   return (
     <ContextProvider>
       <MapContextProvider>
         <FilterContextProvider>
           <FormContextProvider>
             <PostFormContextProvider>
-              {/* <CategoryIDContextProvider> */}
-              <Router>
-                <Routes>
-                  <Route index path="/" element={<MainPage />} />
-                  <Route path="/hakkimizda" element={<AboutPage />} />
-                  <Route path="/ihtiyaclar" element={<NeedPage />} />
-                  <Route
-                    path="/yardimtalebi"
-                    element={<RequestForHelpPage />}
-                  />
-                  <Route
-                    path="/yardimtalebi/:categoryID"
-                    element={<HelpFormPage />}
-                  />
-                  <Route
-                    path="/sifresifirlama"
-                    element={<ResetPasswordPage />}
-                  />
-                  <Route
-                    path="sifredegistirme"
-                    element={<ChangePasswordPage />}
-                  />
-                  <Route path="*" element={<ErrorPage />} />
-                </Routes>
-              </Router>
-              {/* </CategoryIDContextProvider> */}
+              <UserContextProvider>
+                <UserTaskContextProvider>
+                  <Router>
+                    <Routes>
+                      <Route index path="/" element={<MainPage />} />
+                      <Route path="/hakkimizda" element={<AboutPage />} />
+                      <Route path="/ihtiyaclar" element={<NeedPage />} />
+                      <Route
+                        path="/yardimtalebi"
+                        element={<RequestForHelpPage />}
+                      />
+                      <Route
+                        path="/yardimtalebi/:categoryID"
+                        element={<HelpFormPage />}
+                      />
+                      <Route
+                        path="/sifresifirlama"
+                        element={<ResetPasswordPage />}
+                      />
+                      <Route
+                        path="sifredegistirme"
+                        element={<ChangePasswordPage />}
+                      />
+                      <Route path="*" element={<ErrorPage />} />
+                    </Routes>
+                  </Router>
+                </UserTaskContextProvider>
+              </UserContextProvider>
             </PostFormContextProvider>
           </FormContextProvider>
         </FilterContextProvider>

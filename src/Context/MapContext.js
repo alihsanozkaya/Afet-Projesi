@@ -19,7 +19,7 @@ export const MapContextProvider = ({ children }) => {
         setLoading(false);
       });}
       fetchData();
-  }, []);
+  }, [markers]);
   if (loading) {
     return console.log("Veriler yükleniyor...");
   }

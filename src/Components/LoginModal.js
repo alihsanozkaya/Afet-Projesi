@@ -1,14 +1,19 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
 import { Context } from "../Context/Context";
+import { UserContext } from "../Context/UserContext";
 
 Modal.setAppElement("#root");
 const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
-  const { setState } = useContext(Context);
-
-  const Login = () => {
-    setState(true);
-  };
+  const {login, veri, setVeri, success} = useContext(UserContext)
+  const control = (e) => {
+    e.preventDefault();
+    login();
+    if(success){
+      closeLoginModal();
+    }
+  }
+  
   return (
     <>
       <Modal
@@ -44,6 +49,8 @@ const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
                               id="form3Example3c"
                               className="form-control"
                               placeholder="name@example.com"
+                              value={veri.email}
+                              onChange={(e) => setVeri({...veri, email: e.target.value})}
                             />
                           </div>
                         </div>
@@ -55,6 +62,8 @@ const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
                               id="form3Example4c"
                               className="form-control"
                               placeholder="Şifrenizi giriniz"
+                              value={veri.password}
+                              onChange={(e) => setVeri({...veri, password: e.target.value})}
                             />
                           </div>
                         </div>
@@ -65,10 +74,7 @@ const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
                           <button
                             type="button"
                             className="btn btn-primary btn-lg"
-                            onClick={() => {
-                              closeLoginModal();
-                              Login();
-                            }}
+                            onClick={control}
                           >
                             Giriş yap
                           </button>

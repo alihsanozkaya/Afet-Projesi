@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "react-modal";
+import { UserContext } from "../Context/UserContext";
 
 Modal.setAppElement("#root");
 const SignUpModal = ({ SignUpModalisOpen, closeSignUpModal }) => {
+  const {data, setData, register, success} = useContext(UserContext)
+  const control = (e) => {
+    e.preventDefault();
+    register();
+    if(success){
+      closeSignUpModal();
+    }
+  }
   return (
     <>
       <Modal
@@ -38,6 +47,8 @@ const SignUpModal = ({ SignUpModalisOpen, closeSignUpModal }) => {
                               id="form3Example1c"
                               className="form-control"
                               placeholder="Adınızı giriniz"
+                              value={data.name}
+                              onChange={(e) => setData({...data, name: e.target.value})}
                             />
                           </div>
                         </div>
@@ -49,6 +60,8 @@ const SignUpModal = ({ SignUpModalisOpen, closeSignUpModal }) => {
                               id="form3Example3c"
                               className="form-control"
                               placeholder="name@example.com"
+                              value={data.email}
+                              onChange={(e) => setData({...data, email: e.target.value})}
                             />
                           </div>
                         </div>
@@ -60,17 +73,8 @@ const SignUpModal = ({ SignUpModalisOpen, closeSignUpModal }) => {
                               id="form3Example4c"
                               className="form-control"
                               placeholder="Şifrenizi giriniz"
-                            />
-                          </div>
-                        </div>
-                        <div className="d-flex flex-row align-items-center mb-4">
-                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div className="form-outline flex-fill mb-0 mx-1">
-                            <input
-                              type="password"
-                              id="form3Example4cd"
-                              className="form-control"
-                              placeholder="Şifrenizi tekrar giriniz"
+                              value={data.password}
+                              onChange={(e) => setData({...data, password: e.target.value})}
                             />
                           </div>
                         </div>
@@ -89,7 +93,7 @@ const SignUpModal = ({ SignUpModalisOpen, closeSignUpModal }) => {
                           <button
                             type="button"
                             className="btn btn-primary btn-lg"
-                            onClick={closeSignUpModal}
+                            onClick={control}
                           >
                             Kaydol
                           </button>

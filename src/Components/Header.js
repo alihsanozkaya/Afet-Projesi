@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../CSS/App.css";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import Notification from "./Notification";
+import { UserContext } from "../Context/UserContext";
 
 const Header = () => {
   const [LoginModalisOpen, setLoginModalisOpen] = useState(false);
@@ -19,9 +20,13 @@ const Header = () => {
   function closeSignUpModal() {
     setSignUpModalisOpen(false);
   }
+  const {success, setSuccess, isAuthenticated , setIsAuthenticated} = useContext(UserContext)
+  const logout = () => {
+    setIsAuthenticated(false)
+  }
   return (
     <>
-      <header className="header d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-5 border-bottom">
+      <header className="header d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-5 border-bottom lg">
         <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li>
             <a href="/" className="nav-link px-3">
@@ -48,8 +53,9 @@ const Header = () => {
               About
             </a>
           </li>
-        </ul>
-        <div className="col-md-3 text-end">
+        </ul><div className="col-md-3 text-end">
+        {!isAuthenticated ? (
+          <>
           <button
             type="button"
             className="btn btn-secondary mx-1"
@@ -66,7 +72,12 @@ const Header = () => {
           >
             Üye ol
           </button>
-          <Notification/>
+          </>
+        ) : (<>
+        <Notification/>
+            <button type="button" className="btn btn-outline-primary" onClick={logout}>Çıkış yap</button>
+        </>
+        )}
         </div>
       </header>
       <LoginModal

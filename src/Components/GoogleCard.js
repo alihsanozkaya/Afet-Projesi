@@ -119,8 +119,9 @@ export default function SimpleMap() {
             zoom={zoom}
             onChange={handleMapChange}
           >
-            {areas.map((marker) => (
+            {areas.map((marker, i) => (
               <AnyReactComponent
+                key={i}
                 area={marker}
                 name={marker.name}
                 lat={marker.coordinates.latitude}

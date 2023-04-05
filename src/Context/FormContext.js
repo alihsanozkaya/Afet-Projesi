@@ -11,15 +11,15 @@ export const FormContextProvider = ({ children }) => {
      await axios
       .get("https://afetapi.onrender.com/api/formCategories")
       .then((res) => {
-        setLoading(false);
         setformCategories(res.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });}
       fetchData();
-  }, []);
+  }, [formCategories]);
   if (loading) {
     return console.log("Veriler yükleniyor...");
   }
