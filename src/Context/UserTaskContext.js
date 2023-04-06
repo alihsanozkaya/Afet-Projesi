@@ -6,7 +6,7 @@ export const UserTaskContext = createContext();
 export const UserTaskContextProvider = ({children}) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+    const [user, setUser] = useState(  JSON.parse(localStorage.getItem("user")) || {});
 
     useEffect(() => {
       async function fetchData(){
