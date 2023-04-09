@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useState } from 'react'
 
 export const UserContext = createContext();
 
@@ -14,7 +14,6 @@ export const UserContextProvider = ({children}) =>{
         email: "",
         password: "",
     })
-    const [auth, setAuth] = useState({})
     const [success, setSuccess] = useState(false)
     const register = async () => {
         try {
@@ -37,29 +36,12 @@ export const UserContextProvider = ({children}) =>{
                 password: veri.password
             })
             setSuccess(true)
-            localStorage.setItem("token", res.data.token)
             localStorage.setItem("user", JSON.stringify(res.data.user))
             setIsAuthenticated(true)
-            console.log(res.data)
         } catch (error) {
             console.log(error)
         }
     }
-
-    const isUserLoggedIn = async () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-          const user = JSON.parse(localStorage.getItem("user"));
-          setAuth({ token, user });
-        } else {
-          setAuth({});
-        }
-      }
-    
-      useEffect(() => {
-        isUserLoggedIn();
-      }, [isUserLoggedIn]);
-
     const postUserContext = {
         data,
         setData,
@@ -70,8 +52,6 @@ export const UserContextProvider = ({children}) =>{
         setVeri,
         isAuthenticated,
         setIsAuthenticated,
-        isUserLoggedIn,
-        auth
     }
     
     return(

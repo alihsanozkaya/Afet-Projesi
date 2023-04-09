@@ -7,24 +7,11 @@ import ResetPasswordPage from "./Pages/ResetPasswordPage";
 import ChangePasswordPage from "./Pages/ChangePasswordPage";
 import HelpFormPage from "./Pages/HelpFormPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ContextProvider } from "./Context/Context";
-import { MapContextProvider } from "./Context/MapContext";
-import { FilterContextProvider } from "./Context/FilterContext";
-import { FormContextProvider } from "./Context/FormContext";
-import { PostFormContextProvider } from "./Context/PostFormContext";
-import { UserContextProvider } from "./Context/UserContext";
-import { UserTaskContextProvider } from "./Context/UserTaskContext";
 
 function App() {
 
   return (
-    <ContextProvider>
-      <MapContextProvider>
-        <FilterContextProvider>
-          <FormContextProvider>
-            <PostFormContextProvider>
-              <UserContextProvider>
-                <UserTaskContextProvider>
+    
                   <Router>
                     <Routes>
                       <Route index path="/" element={<MainPage />} />
@@ -49,13 +36,7 @@ function App() {
                       <Route path="*" element={<ErrorPage />} />
                     </Routes>
                   </Router>
-                </UserTaskContextProvider>
-              </UserContextProvider>
-            </PostFormContextProvider>
-          </FormContextProvider>
-        </FilterContextProvider>
-      </MapContextProvider>
-    </ContextProvider>
+
   );
 }
 

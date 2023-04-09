@@ -20,9 +20,11 @@ const Header = () => {
   function closeSignUpModal() {
     setSignUpModalisOpen(false);
   }
-  const {success, setSuccess, isAuthenticated , setIsAuthenticated} = useContext(UserContext)
+  const {isAuthenticated , setIsAuthenticated} = useContext(UserContext)
+  const user = JSON.parse(localStorage.getItem('user'))
   const logout = () => {
     setIsAuthenticated(false)
+    localStorage.removeItem('user')
   }
   return (
     <>
@@ -54,7 +56,7 @@ const Header = () => {
             </a>
           </li>
         </ul><div className="col-md-3 text-end">
-        {!isAuthenticated ? (
+        {!isAuthenticated && !user? (
           <>
           <button
             type="button"
