@@ -1,8 +1,11 @@
 import SimpleMap from "../Components/GoogleCard";
 import Layout from "../Components/Layout";
+import { FilterContextProvider } from "../Context/FilterContext";
 
 const MainPage = () => {
   return (
+
+
     <Layout>
       <p className="ornek">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum accusantium
@@ -62,6 +65,7 @@ const MainPage = () => {
         saepe amet. Minus est veritatis rerum? Iure, veritatis et.
       </p>
     </Layout>
+ 
   );
 };
 export default MainPage;

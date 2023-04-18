@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
-import { Context } from "../Context/Context";
 import { UserContext } from "../Context/UserContext";
 
 Modal.setAppElement("#root");

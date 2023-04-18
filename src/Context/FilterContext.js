@@ -40,7 +40,7 @@ export const FilterContextProvider = ({ children }) => {
     fetchData();
   }, [checkedValues]);
   if (loading) {
-    return console.log("Veriler yükleniyor...");
+    return console.log("Veriler yükleniyor... Filter Context");
   }
 
   return (

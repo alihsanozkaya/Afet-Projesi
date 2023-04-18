@@ -1,12 +1,13 @@
 import Layout from "../Components/Layout";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { FormContext } from "../Context/FormContext";
+import { FormContext, FormContextProvider } from "../Context/FormContext";
 
 const RequestForHelpPage = () => {
   const formCategories = useContext(FormContext);
   const navigate = useNavigate();
   return (
+  
     <Layout>
       {formCategories.map((category, i) =>
         category.parent === null ? (
@@ -26,6 +27,7 @@ const RequestForHelpPage = () => {
         )
       )}
     </Layout>
+
   );
 };
 export default RequestForHelpPage;

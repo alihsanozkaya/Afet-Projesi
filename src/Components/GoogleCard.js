@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 import { Badge, Button, Popover, Tag } from "antd";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
@@ -79,6 +79,13 @@ export default function SimpleMap() {
 
     mapRef.current.panTo(latLng);
   };
+
+  useEffect(() => {
+    if (address === "") {
+      setCenter(defaultProps.center);
+      setZoom(defaultProps.zoom);
+    }
+  }, [address]);
 
   const handleMapChange = ({ center }) => {
     setCenter(center);

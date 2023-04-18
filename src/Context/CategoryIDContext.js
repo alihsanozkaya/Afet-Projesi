@@ -26,7 +26,7 @@ export const CategoryIDContextProvider = ({children}) =>{
           });
       }, []);
       if (loading) {
-        return console.log("Veriler yükleniyor...");
+        return console.log("Veriler yükleniyor... CategoryId Context");
       }
     return(
         <CategoryIDContext.Provider value={{formCategory, data, setData, createForm}}>

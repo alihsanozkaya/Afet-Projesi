@@ -22,7 +22,7 @@ export const FormContextProvider = ({ children }) => {
     fetchData();
   }, [formCategories]);
   if (loading) {
-    return console.log("Veriler yükleniyor...");
+    return console.log("Veriler yükleniyor... Form Context");
   }
 
   return (

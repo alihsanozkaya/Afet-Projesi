@@ -9,34 +9,21 @@ import HelpFormPage from "./Pages/HelpFormPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-
   return (
-    
-                  <Router>
-                    <Routes>
-                      <Route index path="/" element={<MainPage />} />
-                      <Route path="/hakkimizda" element={<AboutPage />} />
-                      <Route path="/ihtiyaclar" element={<NeedPage />} />
-                      <Route
-                        path="/yardimtalebi"
-                        element={<RequestForHelpPage />}
-                      />
-                      <Route
-                        path="/yardimtalebi/:categoryID"
-                        element={<HelpFormPage />}
-                      />
-                      <Route
-                        path="/sifresifirlama"
-                        element={<ResetPasswordPage />}
-                      />
-                      <Route
-                        path="sifredegistirme"
-                        element={<ChangePasswordPage />}
-                      />
-                      <Route path="*" element={<ErrorPage />} />
-                    </Routes>
-                  </Router>
-
+    <>
+      <Router>
+        <Routes>
+          <Route index path="/" element={<MainPage />} />
+          <Route path="/hakkimizda" element={<AboutPage />} />
+          <Route path="/ihtiyaclar" element={<NeedPage />} />
+          <Route path="/yardimtalebi" element={<RequestForHelpPage />} />
+          <Route path="/yardimtalebi/:categoryID" element={<HelpFormPage />} />
+          <Route path="/sifresifirlama" element={<ResetPasswordPage />} />
+          <Route path="sifredegistirme" element={<ChangePasswordPage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
