@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState ,useReducer} from "react";
 import axios from "axios";
 
 export const FilterContext = createContext();
@@ -7,45 +7,79 @@ export const useFilterContext = () => {
   return useContext(FilterContext);
 };
 
-export const FilterContextProvider = ({ children }) => {
-  const [checkedValues, setCheckedValues] = useState([]);
-  const [areas, setAreas] = useState([]);
-  const [loading, setLoading] = useState(true);
+const GET_ALL_AREA_INITIAL_STATE = {
+  areas: [
+    {
+      _id: "",
+      name: "",
+      coordinates: null,
+      requrired_products: [],
+      requrired_people: [],
+    },
+  ],
+};
 
-  const handleCheckboxChange = (value) => {
-    if (checkedValues.includes(value)) {
-      setCheckedValues(checkedValues.filter((v) => v !== value));
-    } else {
-      setCheckedValues([...checkedValues, value]);
+export const getAllAreaReducer = (state = GET_ALL_AREA_INITIAL_STATE, action) => {
+  switch (action.type) {
+    case "GET_ALL_AREA_REQUEST":
+      return { ...state, loading: true };
+
+    case "GET_ALL_AREA_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        areas: action.payload,
+      };
+
+    case "GET_ALL_AREA_FAIL":
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+
+
+export const FilterContextProvider = ({ children }) => {
+
+  const [state, dispatch] = useReducer(getAllAreaReducer ,GET_ALL_AREA_INITIAL_STATE)
+
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [priorityOrders, setPriorityOrders] = useState([]);
+  const [selectedPeople , setSelectedPeople] = useState([]);
+  const fetchAreasWithDispatch = async () => {
+    try {
+      dispatch({
+        type: "GET_ALL_AREA_REQUEST",
+      });
+  
+      const {data}  = await axios.get(`https://afetapi.onrender.com/api/filter-areas?filters=${selectedProducts}&priorityOrders=${priorityOrders}&people=${selectedPeople}`)
+      
+  
+      dispatch({
+        type: "GET_ALL_AREA_SUCCESS",
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "GET_ALL_AREA_FAIL",
+        error: error.response,
+      });
     }
-  };
+  }
+  
+
 
   useEffect(() => {
-    async function fetchData() {
-      await axios
-        .get(
-          checkedValues !== []
-            ? `https://afetapi.onrender.com/api/get-filter-areas?priorityOrders=${checkedValues}`
-            : `https://afetapi.onrender.com/api/get-filter-areas?priorityOrders=`
-        )
-        .then((res) => {
-          setLoading(false);
-          setAreas(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-          setLoading(false);
-        });
-    }
-    fetchData();
-  }, [checkedValues]);
-  if (loading) {
-    return console.log("Veriler yükleniyor... Filter Context");
-  }
+    fetchAreasWithDispatch()
+  }, [])
+  
+  
 
   return (
     <FilterContext.Provider
-      value={{ checkedValues, handleCheckboxChange, areas }}
+      value={{ state,dispatch , fetchAreasWithDispatch}}
     >
       {children}
     </FilterContext.Provider>

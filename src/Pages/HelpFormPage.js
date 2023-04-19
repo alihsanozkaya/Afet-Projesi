@@ -23,12 +23,16 @@ const HelpFormPage = () => {
         console.log(error);
         setLoading(false);
       });
+   
   }, []);
   if (loading) {
+
     return console.log("Veriler yükleniyor...");
   }
+    
   return (
-    <Layout>
+    <Layout>l
+
       <div className="container">
         <h2 className="my-4" style={{color: "blue"}}>{formCategory.name}</h2>
         <form id="form" className="mt-2">

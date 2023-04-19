@@ -1,8 +1,8 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
-import { Badge, Button, Popover, Tag } from "antd";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { FilterContext } from "../Context/FilterContext";
+import {Button, Popover} from "antd";
+import {geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import {FilterContext} from "../Context/FilterContext";
 import FiltersButton from "./FiltersButton";
 import SearchInput from "./SearchInput";
 import RequiredItems from "./RequiredItems";
@@ -97,8 +97,17 @@ export default function SimpleMap() {
       setZoom(15);
     }
   };
-  const { handleCheckboxChange } = useContext(FilterContext);
-  const { areas } = useContext(FilterContext);
+  // const { handleCheckboxChange } = useContext(FilterContext);
+  // const { areas } = useContext(FilterContext);
+
+  const {state,dispatch,fetchAreasWithDispatch} = useContext(FilterContext)
+
+  const fetchAreas = () => {
+    fetchAreasWithDispatch();
+
+  };
+  console.log(state.areas)
+
   return (
     <>
       <div className="container d-flex flex-row justify-content-end">
@@ -109,9 +118,12 @@ export default function SimpleMap() {
             handleSelect={handleSelect}
           />
         </div>
+         {/*
         <div style={{ maxHeight: "38px" }}>
           <FiltersButton handleCheckboxChange={handleCheckboxChange} />
         </div>
+        */}
+
       </div>
 
       <div
@@ -126,7 +138,7 @@ export default function SimpleMap() {
             zoom={zoom}
             onChange={handleMapChange}
           >
-            {areas.map((marker, i) => (
+            {state.areas.map((marker, i) => (
               <AnyReactComponent
                 key={i}
                 area={marker}

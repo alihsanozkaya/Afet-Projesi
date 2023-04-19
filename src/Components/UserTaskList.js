@@ -1,16 +1,22 @@
 import { List } from "antd";
-import React, {useContext} from "react";
+import React, {useContext , useEffect} from "react";
 import UserTaskItem from './UserTaskItem.js'
-import { UserTaskContext } from "../Context/UserTaskContext";
-
+import { UserTaskContext, GetUserTasks  } from "../Context/UserTaskContext";
+ 
 const UserTaskList  = () => {
-    const {data} = useContext(UserTaskContext)
+    const {state,dispatch,fetchUserTasksWithDispatch} = useContext(UserTaskContext)
+
+  const fetchUserTasks = () => {
+    fetchUserTasksWithDispatch();
+  
+  };
+  console.log(state.userTasks) 
     return (
           <div className='scrollbar-ripe-malinka' style={{maxHeight: "200px", overflowY:"auto"}}>
         
         <List
           itemLayout="horizontal"
-          dataSource={data}
+          dataSource={state.userTasks}
           renderItem={(task) => (
               <UserTaskItem 
                 task={task}

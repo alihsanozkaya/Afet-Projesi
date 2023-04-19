@@ -1,37 +1,80 @@
 import axios from 'axios';
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useReducer , useEffect} from 'react'
+import UserTaskReducer from '../reducer/userTaskReducer'
 
 export const UserTaskContext = createContext();
+const initialState = {
+    userTasks : [],
+    success: false,
+    error : null 
+}
 
-export const UserTaskContextProvider = ({children}) => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
 
-    useEffect(() => {
-        if(user !== {})
-        {
-            async function fetchData(){
-                await axios
-                    .get(`https://afetapi.onrender.com/api/users/${user._id}/tasks`)
-                    .then((res) => {
-                        setData(res.data)
-                        setLoading(false)
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                        setLoading(false)
-                    })
-              }
-              fetchData()
-        }
-    }, [user,data])
-    if(loading){
-        return console.log("Veriler yükleniyor UserTask Context")
+export const getUserTasksReducer = (
+    state = initialState,
+    action
+  ) => {
+    switch (action.type) {
+      case "GET_USER_TASKS_REQUEST":
+        return { ...state, loading: true };
+  
+      case "GET_USER_TASKS_SUCCESS":
+        return {
+          ...state,
+          loading: false,
+          success: true,
+          
+          userTasks: action.payload,
+        };
+  
+      case "GET_USER_TASKS_FAIL":
+        return {
+          ...state,
+          loading: false,
+          success: false,
+          error: action.payload,
+        };
+      default:
+        return state;
     }
+  };
+
+
+
+ 
+export const UserTaskContextProvider = ({children}) => {
+
+    const [state, dispatch] = useReducer(getUserTasksReducer ,initialState)
+ 
+
+
+    const fetchUserTasksWithDispatch = async () => {
+      try {
+        dispatch({ type: "GET_USER_TASKS_REQUEST" });
+  
+        const user = JSON.parse(localStorage.getItem("user"));
+        const { data } = await axios.get(
+          `https://afetapi.onrender.com/api/users/${user._id}/tasks`
+        );
+  
+        dispatch({
+          type: "GET_USER_TASKS_SUCCESS",
+          payload: data,
+        });
+      } catch (error) {
+        dispatch({
+          type: "GET_USER_TASKS_FAIL",
+          payload: error.message,
+        });
+      }
+    };
+    useEffect(() => {
+        fetchUserTasksWithDispatch();
+      }, []);
+    
 
     return(
-        <UserTaskContext.Provider value={{data}}>
+        <UserTaskContext.Provider value={{state,dispatch}}>
             {children}
         </UserTaskContext.Provider>
     )
