@@ -57,13 +57,9 @@ const Header = () => {
               Yardım Talebi
             </a>
           </li>
-          <li>
-            <a href="#" className="nav-link px-3">
-              About
-            </a>
-          </li>
         </ul><div className="col-md-3 text-end">
-        {!isAuthenticated && !currentUser ? (          <>
+        {!isAuthenticated && !currentUser ? (          
+        <>
           <button
             type="button"
             className="btn btn-secondary mx-1"
