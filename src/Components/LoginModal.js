@@ -1,18 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
 import { UserContext } from "../Context/UserContext";
 
 Modal.setAppElement("#root");
 const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
-  const {login, veri, setVeri, success} = useContext(UserContext)
-  const control = (e) => {
+  const { login, veri, setVeri, success, setSuccess } = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const control = async (e) => {
     e.preventDefault();
-    login();
-    if(success){
+    const loginResult = await login();
+    if (loginResult) {
+      setErrorMessage("");
+    } else {
+      setErrorMessage("Kullanıcı bilgileri uyuşmuyor");
+    }
+  };
+
+  useEffect(() => {
+    if (success) {
       closeLoginModal();
     }
-  }
-  
+  }, [success, closeLoginModal]);
+
   return (
     <>
       <Modal
@@ -49,7 +59,9 @@ const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
                               className="form-control"
                               placeholder="name@example.com"
                               value={veri.email}
-                              onChange={(e) => setVeri({...veri, email: e.target.value})}
+                              onChange={(e) =>
+                                setVeri({ ...veri, email: e.target.value })
+                              }
                             />
                           </div>
                         </div>
@@ -62,7 +74,9 @@ const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
                               className="form-control"
                               placeholder="Şifrenizi giriniz"
                               value={veri.password}
-                              onChange={(e) => setVeri({...veri, password: e.target.value})}
+                              onChange={(e) =>
+                                setVeri({ ...veri, password: e.target.value })
+                              }
                             />
                           </div>
                         </div>
@@ -78,6 +92,14 @@ const LoginModal = ({ LoginModalisOpen, closeLoginModal }) => {
                             Giriş yap
                           </button>
                         </div>
+                        {errorMessage !== "" && (
+                          <div
+                            className="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
+                            style={{ color: "red" }}
+                          >
+                            {errorMessage}
+                          </div>
+                        )}
                       </form>
                     </div>
                     <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../CSS/App.css";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
@@ -21,11 +21,18 @@ const Header = () => {
     setSignUpModalisOpen(false);
   }
   const {isAuthenticated , setIsAuthenticated} = useContext(UserContext)
-  const user = JSON.parse(localStorage.getItem('user'))
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
   const logout = () => {
-    setIsAuthenticated(false)
-    localStorage.removeItem('user')
-  }
+    setIsAuthenticated(false);
+    localStorage.removeItem("user");
+    setCurrentUser(null);
+    window.location.reload();
+  };
+  useEffect(() => {
+    setCurrentUser(JSON.parse(localStorage.getItem("user")));
+  }, [isAuthenticated]);
   return (
     <>
       <header className="header d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-5 border-bottom lg">
@@ -56,8 +63,7 @@ const Header = () => {
             </a>
           </li>
         </ul><div className="col-md-3 text-end">
-        {!isAuthenticated && !user? (
-          <>
+        {!isAuthenticated && !currentUser ? (          <>
           <button
             type="button"
             className="btn btn-secondary mx-1"

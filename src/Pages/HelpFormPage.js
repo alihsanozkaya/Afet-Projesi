@@ -31,8 +31,7 @@ const HelpFormPage = () => {
   }
     
   return (
-    <Layout>l
-
+    <Layout>
       <div className="container">
         <h2 className="my-4" style={{color: "blue"}}>{formCategory.name}</h2>
         <form id="form" className="mt-2">
