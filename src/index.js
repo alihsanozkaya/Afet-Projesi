@@ -6,6 +6,7 @@ import { FormContextProvider } from "./Context/FormContext";
 import { PostFormContextProvider } from "./Context/PostFormContext";
 import { UserContextProvider } from "./Context/UserContext";
 import { UserTaskContextProvider } from "./Context/UserTaskContext";
+import { LiveLocationContextProvider } from "./Context/LiveLocationContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +15,9 @@ root.render(
       <PostFormContextProvider>
         <UserContextProvider>
           <UserTaskContextProvider>
-            <App />
+            <LiveLocationContextProvider>
+              <App />
+            </LiveLocationContextProvider>
           </UserTaskContextProvider>
         </UserContextProvider>
       </PostFormContextProvider>

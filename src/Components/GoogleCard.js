@@ -1,56 +1,79 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
-import {Button, Popover} from "antd";
-import {geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import {FilterContext} from "../Context/FilterContext";
+import { Button, Popover } from "antd";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { FilterContext } from "../Context/FilterContext";
 import FiltersButton from "./FiltersButton";
 import SearchInput from "./SearchInput";
 import RequiredItems from "./RequiredItems";
+import { useLiveLocationContext } from "../Context/LiveLocationContext";
 
-const AnyReactComponent = ({ area, lat, lng, name }) => (
-  <Popover
-    content={
-      <div
-        className="container"
-        style={{ borderRadius: "10px", maxWidth: "300px" }}
-      >
-        <h5>{name}</h5>
+const AnyReactComponent = ({ area, lat, lng, name }) => {
+  if (!area) {
+    // Render a marker for live location
+    return (
+      <Popover content={<div>
+        <h5>Canlı Konum</h5>
         <p>Enlem: {lat}</p>
         <p>Boylam: {lng}</p>
-        <p>
-          Gerekli ürünler:{" "}
-          {area.requrired_products.length === 0 ? (
-            "İhtiyaç yok"
-          ) : (
-            <div className="d-flex flex-wrap justify-content-start">
-              {area.requrired_products.map((product, i) => (
-                <RequiredItems product={product} isPerson = {false} key={i}/>
-              ))}
-            </div>
-          )}
-        </p>
-        <p>
-          Gerekli Personel:{" "}
-          {area.requrired_people.length === 0 ? (
-            "İhtiyaç yok"
-          ) : (
-            <div className="d-flex flex-wrap justify-content-start">
-              {area.requrired_people.map((person, i) => (
-                <RequiredItems person={person} isPerson = {true} key={`person-${i}`}/>
-              ))}
-            </div>
-          )}
-        </p>
-      </div>
-    }
-  >
-    <Button
-      type="default"
-      style={{ backgroundColor: "red" }}
-      icon={<i className="fa-solid fa-triangle-exclamation fa-beat"></i>}
-    ></Button>
-  </Popover>
-);
+        </div>}>
+        <Button
+          type="default"
+          style={{color: "black"}}
+          icon={<i className="fa-solid fa-user fa-beat-fade"></i>}
+        ></Button>
+      </Popover>
+    );
+  }
+
+  return (
+    <Popover
+      content={
+        <div
+          className="container"
+          style={{ borderRadius: "10px", maxWidth: "300px" }}
+        >
+          <h5>{name}</h5>
+          <p>Enlem: {lat}</p>
+          <p>Boylam: {lng}</p>
+          <p>
+            Gerekli ürünler:{" "}
+            {area?.requrired_products && area?.requrired_products.length === 0 ? (
+              "İhtiyaç yok"
+            ) : (
+              <div className="d-flex flex-wrap justify-content-start">
+                {area.requrired_products &&
+                  area.requrired_products.map((product, i) => (
+                    <RequiredItems product={product} isPerson={false} key={i} />
+                  ))}
+              </div>
+            )}
+          </p>
+          <p>
+            Gerekli Personel:{" "}
+            {area?.requrired_people && area?.requrired_people.length === 0 ? (
+              "İhtiyaç yok"
+            ) : (
+              <div className="d-flex flex-wrap justify-content-start">
+                {area?.requrired_people &&
+                  area?.requrired_people.map((person, i) => (
+                    <RequiredItems person={person} isPerson={true} key={`person-${i}`} />
+                  ))}
+              </div>
+            )}
+          </p>
+        </div>
+      }
+    >
+      <Button
+        type="default"
+        style={{ backgroundColor: "red" }}
+        icon={<i className="fa-solid fa-triangle-exclamation fa-beat"></i>}
+      ></Button>
+    </Popover>
+  );
+};
+
 export default function SimpleMap() {
   const defaultProps = {
     center: {
@@ -97,16 +120,14 @@ export default function SimpleMap() {
       setZoom(15);
     }
   };
-  // const { handleCheckboxChange } = useContext(FilterContext);
-  // const { areas } = useContext(FilterContext);
 
-  const {state,dispatch,fetchAreasWithDispatch} = useContext(FilterContext)
+  const { state, dispatch, fetchAreasWithDispatch } = useContext(FilterContext);
+  const liveLocation = useLiveLocationContext();
 
   const fetchAreas = () => {
     fetchAreasWithDispatch();
-
   };
-  console.log(state.areas)
+  console.log(state.areas);
 
   return (
     <>
@@ -118,18 +139,12 @@ export default function SimpleMap() {
             handleSelect={handleSelect}
           />
         </div>
-         {/*
-        <div style={{ maxHeight: "38px" }}>
+        {/*<div style={{ maxHeight: "38px" }}>
           <FiltersButton handleCheckboxChange={handleCheckboxChange} />
-        </div>
-        */}
-
+        </div>*/}
       </div>
 
-      <div
-        className="container"
-        style={{ marginTop: "30px", marginBottom: "30px" }}
-      >
+      <div className="container" style={{ marginTop: "30px", marginBottom: "30px" }}>
         <div style={{ height: "500px", width: "auto" }}>
           <GoogleMapReact
             defaultCenter={defaultProps.center}
@@ -142,11 +157,20 @@ export default function SimpleMap() {
               <AnyReactComponent
                 key={i}
                 area={marker}
-                name={marker.name}
-                lat={marker.coordinates.latitude}
-                lng={marker.coordinates.longitude}
+                name={marker?.name}
+                lat={marker?.coordinates?.latitude}
+                lng={marker?.coordinates?.longitude}
               />
             ))}
+
+            {liveLocation && (
+              <AnyReactComponent
+                area={null}
+                name="Canlı konum"
+                lat={liveLocation?.latitude}
+                lng={liveLocation?.longitude}
+              />
+            )}
           </GoogleMapReact>
         </div>
       </div>
