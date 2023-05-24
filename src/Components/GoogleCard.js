@@ -139,10 +139,11 @@ export default function SimpleMap() {
             handleSelect={handleSelect}
           />
         </div>
-        {/*<div style={{ maxHeight: "38px" }}>
-          <FiltersButton handleCheckboxChange={handleCheckboxChange} />
-        </div>*/}
+        <div style={{ maxHeight: "38px" }}>
+          <FiltersButton/>
+        </div>
       </div>
+      {/* {handleCheckboxChange={handleCheckboxChange}}  */}
 
       <div className="container" style={{ marginTop: "30px", marginBottom: "30px" }}>
         <div style={{ height: "500px", width: "auto" }}>

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState ,useReducer} from "react";
+import React, { createContext, useContext, useEffect, useState, useReducer } from "react";
 import axios from "axios";
 
 export const FilterContext = createContext();
@@ -13,8 +13,8 @@ const GET_ALL_AREA_INITIAL_STATE = {
       _id: "",
       name: "",
       coordinates: null,
-      requrired_products: [],
-      requrired_people: [],
+      required_products: [],
+      required_people: [],
     },
   ],
 };
@@ -39,24 +39,22 @@ export const getAllAreaReducer = (state = GET_ALL_AREA_INITIAL_STATE, action) =>
   }
 };
 
-
-
 export const FilterContextProvider = ({ children }) => {
-
-  const [state, dispatch] = useReducer(getAllAreaReducer ,GET_ALL_AREA_INITIAL_STATE)
-
+  const [state, dispatch] = useReducer(getAllAreaReducer, GET_ALL_AREA_INITIAL_STATE);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [priorityOrders, setPriorityOrders] = useState([]);
-  const [selectedPeople , setSelectedPeople] = useState([]);
+  const [selectedPeople, setSelectedPeople] = useState([]);
+
   const fetchAreasWithDispatch = async () => {
     try {
       dispatch({
         type: "GET_ALL_AREA_REQUEST",
       });
-  
-      const {data}  = await axios.get(`https://afetapi.onrender.com/api/filter-areas?filters=${selectedProducts}&priorityOrders=${priorityOrders}&people=${selectedPeople}`)
-      
-  
+
+      const { data } = await axios.get(
+        `https://afetapi.onrender.com/api/filter-areas?filters=${selectedProducts}&priorityOrders=${priorityOrders}&people=${selectedPeople}`
+      );
+
       dispatch({
         type: "GET_ALL_AREA_SUCCESS",
         payload: data,
@@ -64,22 +62,18 @@ export const FilterContextProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: "GET_ALL_AREA_FAIL",
-        error: error.response,
+        payload: error.response,
       });
     }
-  }
-  
-
+  };
 
   useEffect(() => {
-    fetchAreasWithDispatch()
-  }, [])
-  
-  
+    fetchAreasWithDispatch();
+  }, [selectedProducts, priorityOrders, selectedPeople]);
 
   return (
     <FilterContext.Provider
-      value={{ state,dispatch , fetchAreasWithDispatch}}
+      value={{ state, dispatch, fetchAreasWithDispatch, selectedProducts, setSelectedProducts, priorityOrders, setPriorityOrders, selectedPeople, setSelectedPeople }}
     >
       {children}
     </FilterContext.Provider>

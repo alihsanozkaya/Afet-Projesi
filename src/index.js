@@ -7,6 +7,8 @@ import { PostFormContextProvider } from "./Context/PostFormContext";
 import { UserContextProvider } from "./Context/UserContext";
 import { UserTaskContextProvider } from "./Context/UserTaskContext";
 import { LiveLocationContextProvider } from "./Context/LiveLocationContext";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

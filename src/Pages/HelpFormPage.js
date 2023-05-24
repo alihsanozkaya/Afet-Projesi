@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Layout from "../Components/Layout";
 import axios from "axios";
 import { PostFormContext } from "../Context/PostFormContext";
+import { toast } from 'react-toastify';
 
 const HelpFormPage = () => {
   const { categoryID } = useParams();
@@ -10,6 +11,22 @@ const HelpFormPage = () => {
   const [formCategory, setFormCategory] = useState({});
   const { data, setData, createForm } = useContext(PostFormContext);
   const urgencies = ["Kritik", "Orta", "Normal"];
+
+  const notifySuccess = () => {
+    toast.success("Formunuz başarıyla gönderildi");
+  };
+
+  const resetForm = () => {
+    setData({
+      name: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      urgency: "",
+      numberOfPerson: "",
+      infoAboutPhysical: ""
+    });
+  };
 
   useEffect(() => {
     axios
@@ -154,6 +171,8 @@ const HelpFormPage = () => {
               cols="60"
               rows="4"
               placeholder="* Fiziki Durum Hakkında Bilgi"
+              value={data.infoAboutPhysical}
+              onChange={(e) => setData({ ...data, infoAboutPhysical: e.target.value})}
             ></textarea>
           </div>
           
@@ -184,8 +203,10 @@ const HelpFormPage = () => {
               className="btn btn-success my-3"
               type="submit"
               onClick={(e) => {
-                e.preventDefault();
                 createForm();
+                e.preventDefault();
+                notifySuccess();
+                resetForm();
               }}
             >
               Gönder

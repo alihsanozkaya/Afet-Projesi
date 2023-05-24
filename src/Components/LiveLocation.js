@@ -12,7 +12,7 @@ const LiveLocation = () => {
     // Belirli bir süre aralığında konumu güncelle
     const interval = setInterval(() => {
       updateLiveLocation();
-    }, 1000); // 10 saniye
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
