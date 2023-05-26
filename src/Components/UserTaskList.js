@@ -8,7 +8,6 @@ const UserTaskList  = () => {
 
   const fetchUserTasks = () => {
     fetchUserTasksWithDispatch();
-  
   };
   console.log(state.userTasks) 
     return (

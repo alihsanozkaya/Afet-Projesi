@@ -146,19 +146,6 @@ const HelpFormPage = () => {
                 placeholder="Kişi Sayısı"
               />
             </div>
-            <div className="form-col">
-            <label className="form-row ">Konum Paylaşımı</label>
-            <button
-              type="button"
-              className="btn btn-warning"
-              style={{ borderRadius: "10px" }}
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-            >
-              Konum Paylaşımı
-            </button>
-          </div>
           </div>
           <div className="form-row my-2">
             <label style={{ width: "208px" }}>

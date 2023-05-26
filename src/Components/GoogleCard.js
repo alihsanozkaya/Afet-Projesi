@@ -6,8 +6,10 @@ import { FilterContext } from "../Context/FilterContext";
 import FiltersButton from "./FiltersButton";
 import SearchInput from "./SearchInput";
 import RequiredItems from "./RequiredItems";
-import { useLiveLocationContext } from "../Context/LiveLocationContext";
-
+import { LiveLocationShowPersonContext } from "../Context/LiveLocationShowPersonContext";
+import { FilterLiveLocationContext } from "../Context/FilterLiveLocationContext";
+import LoadingSpinner from './LoadingSpinner'
+import UserMarker from './Markers/UserMarker'
 const AnyReactComponent = ({ area, lat, lng, name }) => {
   if (!area) {
     // Render a marker for live location
@@ -122,13 +124,29 @@ export default function SimpleMap() {
   };
 
   const { state, dispatch, fetchAreasWithDispatch } = useContext(FilterContext);
-  const liveLocation = useLiveLocationContext();
+
+  const {stateLocationUsers,fetchLiveLocationWithDispatch} = useContext(LiveLocationShowPersonContext)
+  const {filterLocations,selectedRoles, setSelectedRoles , fetchFilterLiveLocationWithDispatch} = useContext(FilterLiveLocationContext)
 
   const fetchAreas = () => {
     fetchAreasWithDispatch();
   };
-  console.log(state.areas);
+  const fetchLocationUsers = () => {
+    fetchLiveLocationWithDispatch()
+  }
 
+  const [showLiveLocation, setShowLiveLocation] = useState(false);
+  
+  const handleToogleLiveLocation = () => {
+    setShowLiveLocation((prev) => !prev);
+  }
+  const handleAddUserRole = (value) => {
+    setSelectedRoles(value)
+}
+  useEffect(() => {
+    if(selectedRoles.length > 0)
+    fetchFilterLiveLocationWithDispatch()
+  },[selectedRoles.length])
   return (
     <>
       <div className="container d-flex flex-row justify-content-end">
@@ -139,12 +157,17 @@ export default function SimpleMap() {
             handleSelect={handleSelect}
           />
         </div>
+ 
+        <button style={{marginLeft: "7px"}}
+        className="btn  btn-outline-primary rounded-pill me-2"
+        onClick={handleToogleLiveLocation}
+      >
+       {showLiveLocation ? " Alanları Göster" : "Canlı Konum Göster"}
+      </button>
         <div style={{ maxHeight: "38px" }}>
-          <FiltersButton/>
+          <FiltersButton handleAddUserRole={handleAddUserRole} showLiveLocation={showLiveLocation }/>
         </div>
       </div>
-      {/* {handleCheckboxChange={handleCheckboxChange}}  */}
-
       <div className="container" style={{ marginTop: "30px", marginBottom: "30px" }}>
         <div style={{ height: "500px", width: "auto" }}>
           <GoogleMapReact
@@ -154,24 +177,37 @@ export default function SimpleMap() {
             zoom={zoom}
             onChange={handleMapChange}
           >
-            {state.areas.map((marker, i) => (
-              <AnyReactComponent
-                key={i}
-                area={marker}
-                name={marker?.name}
-                lat={marker?.coordinates?.latitude}
-                lng={marker?.coordinates?.longitude}
+          {showLiveLocation ? (
+            stateLocationUsers.loading ? (
+              <LoadingSpinner />
+            )  : selectedRoles.length > 0 ? filterLocations.userLocations && filterLocations.userLocations.map((userLocation) => (
+              
+                <UserMarker 
+                userLocation={userLocation}
+                key={userLocation._id}
+                lat={userLocation.location.lat}
+                lng={userLocation.location.lng}
+                />
+              
+            )) : 
+            
+            stateLocationUsers.userLocations && stateLocationUsers.userLocations.map((userLocation) => (
+              <UserMarker 
+              userLocation={userLocation}
+              key={userLocation._id}
+              lat={userLocation.location.lat}
+              lng={userLocation.location.lng}
               />
-            ))}
-
-            {liveLocation && (
-              <AnyReactComponent
-                area={null}
-                name="Canlı konum"
-                lat={liveLocation?.latitude}
-                lng={liveLocation?.longitude}
-              />
-            )}
+            ))
+          ) : state.areas.map((marker, i) => (
+            <AnyReactComponent
+              key={i}
+              area={marker}
+              name={marker?.name}
+              lat={marker?.coordinates?.latitude}
+              lng={marker?.coordinates?.longitude}
+            />
+          ))}
           </GoogleMapReact>
         </div>
       </div>

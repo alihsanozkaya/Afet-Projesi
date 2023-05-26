@@ -1,9 +1,22 @@
-import React from "react";
-import { Popover } from "antd";
+import React, { useContext, useEffect } from "react";
+import { Popover , Space } from "antd";
 import { useFilterContext } from "../Context/FilterContext";
+import { ProductItemContext } from "../Context/ProductItemContext";
+import { PersonItemContext } from "../Context/PersonItemContext";
 
-const FiltersButton = () => {
+import { Select } from "antd";
+const {Option} = Select 
+const FiltersButton = ({handleAddUserRole,showLiveLocation}) => {
   const { selectedProducts, setSelectedProducts, priorityOrders, setPriorityOrders, selectedPeople, setSelectedPeople } = useFilterContext();
+  const { state, dispatch, fetchProductsWithDispatch } = useContext(ProductItemContext);
+  const {statePerson,fetchPersonsWithDispatch} = useContext(PersonItemContext)
+
+   const fetchProduct = () => {
+    fetchProductsWithDispatch()
+  }
+  const fetchPeople = () => {
+    fetchPersonsWithDispatch()
+  }
 
   const handleCheckboxChange = (filterType, value) => {
     if (filterType === "product") {
@@ -18,8 +31,7 @@ const FiltersButton = () => {
       } else {
         setPriorityOrders([...priorityOrders, value]);
       }
-    }
-    else if (filterType === "person") {
+    } else if (filterType === "person") {
       if (selectedPeople.includes(value)) {
         setSelectedPeople(selectedPeople.filter((people) => people !== value));
       } else {
@@ -28,94 +40,84 @@ const FiltersButton = () => {
     }
   };
 
+  const handleAddProduct = (value) => {
+    setSelectedProducts(value);
+  };
+  const handleAddPerson = (value) => {
+    setSelectedPeople(value);
+  };
+
+
+
   return (
     <Popover
       placement="bottom"
       content={
-        <div className="d-flex flex-column ml-2">
-          <h6>Aciliyet</h6>
-          <div className="px-2 mb-2 border-bottom">
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              value="Acil"
-              id="priorityEmergency"
-              checked={priorityOrders.includes("Acil")}
-              onChange={() => handleCheckboxChange("priority", "Acil")}
-            />
-            <a style={{ fontSize: "15px" }}>Acil</a>
+        showLiveLocation ? (
+
+          <Space
+          style={{
+            width: "300px",
+          }}
+          direction="vertical"
+        >
+          <Select
+            mode="multiple"
+            allowClear
+            style={{
+              width: "100%",
+            }}
+            placeholder="Please select"
+            onChange={handleAddUserRole}
+          >
+            {statePerson.personTypes.map((personType) => (
+              <Option value={personType.name} >{personType.name}</Option>
+            ))}
+          </Select>
+          </Space>
+
+        )  : 
+        (
+          <div className="d-flex flex-column">
+          <div>
+            <label className="col-form-label">Ürünler</label>
+            <Select
+              mode="multiple"
+              allowClear
+              style={{
+                width: "100%",
+              }}
+              placeholder="Seçim yapınız"
+              onChange={handleAddProduct}
+            >
+                {state.products.map((product) => (
+                  <Option value={product.title} >{product.title}</Option>
+                ))}
+            
+            </Select>
           </div>
-          <div className="px-2 mb-2 border-bottom">
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              value="Cok Acil"
-              id="priorityUrgent"
-              checked={priorityOrders.includes("Cok Acil")}
-              onChange={() => handleCheckboxChange("priority", "Cok Acil")}
-            />
-            <a style={{ fontSize: "15px" }}>Çok Acil</a>
+          <div>
+            <label className="col-form-label">Personel</label>
+            <Select
+              mode="multiple"
+              allowClear
+              style={{
+                width: "100%",
+              }}
+              placeholder="Seçim yapınız"
+              onChange={handleAddPerson}
+            >
+            
+              {statePerson.personTypes.map((personType) => (
+                <Option value={personType.name} >{personType.name}</Option>
+              ))}
+            </Select>
           </div>
-          <div className="px-2 mb-2 border-bottom">
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              value="Normal"
-              id="flexCheckDefault"
-              checked={priorityOrders.includes("Normal")}
-              onChange={() => handleCheckboxChange("priority","Normal")}
-            />
-            <a style={{ fontSize: "15px" }}>Normal</a>
-          </div>
-          <h6>Personel</h6>
-          <div className="px-2 mb-2 border-bottom">
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              value="Doktor"
-              id="doctor"
-              checked={selectedPeople.includes("Doktor")}
-              onChange={() => handleCheckboxChange("person", "Doktor")}
-            />
-            <a style={{ fontSize: "15px" }}>Doktor</a>
-          </div>
-          <div className="px-2 mb-2 border-bottom">
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              value="Hemşire"
-              id="nurse"
-              checked={selectedPeople.includes("Hemşire")}
-              onChange={() => handleCheckboxChange("person", "Hemşire")}
-            />
-            <a style={{ fontSize: "15px" }}>Hemşire</a>
-          </div>
-          <h6>Ürünler</h6>
-          <div className="px-2 mb-2 border-bottom">
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              value="Çadır"
-              id="tent"
-              checked={selectedProducts.includes("Çadır")}
-              onChange={() => handleCheckboxChange("product", "Çadır")}
-            />
-            <a style={{ fontSize: "15px" }}>Çadır</a>
-          </div>
-          <div className="px-2 mb-2 border-bottom">
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              value="Su"
-              id="waterFilter"
-              checked={selectedProducts.includes("Su")}
-              onChange={() => handleCheckboxChange("product", "Su")}
-            />
-            <a style={{ fontSize: "15px" }}>Su</a>
-          </div>          
         </div>
+        )
+       
       }
-      title={<h5 style={{fontWeight:"bold"}}>Filtrele</h5>}
+      title={<h5 style={{ fontWeight: "bold" }}>Filtrele</h5>}
       trigger="click"
     >
       <button className="btn text-white rounded-pill mx-2" style={{ backgroundColor: "#222" }}>

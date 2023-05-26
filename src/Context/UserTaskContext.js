@@ -1,14 +1,12 @@
 import axios from 'axios';
 import React, { createContext, useReducer , useEffect} from 'react'
 
-
 export const UserTaskContext = createContext();
 const initialState = {
     userTasks : [],
     success: false,
     error : null 
 }
-
 
 export const getUserTasksReducer = (
     state = initialState,
@@ -23,7 +21,6 @@ export const getUserTasksReducer = (
           ...state,
           loading: false,
           success: true,
-          
           userTasks: action.payload,
         };
   
@@ -45,8 +42,6 @@ export const getUserTasksReducer = (
 export const UserTaskContextProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(getUserTasksReducer ,initialState)
- 
-
 
     const fetchUserTasksWithDispatch = async () => {
       try {
